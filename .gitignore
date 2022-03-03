@@ -1,0 +1,40 @@
+# prepeding '**' matches directories anywhere in the repository. 
+# Prepending an exclamation mark to a pattern negates it. If a file matches a pattern, but also matches a negating pattern defined later in the file, it will not be ignored.
+# A question mark matches exactly one character.
+# Square brackets can also be used to match a single character from a specified range.
+# If you don't append a slash, the pattern will match both files and directories
+# Appending a slash indicates the pattern is a directory.
+# logs/**/debug.log -> matches zore or more directories
+# src/main/resources/application.properties
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
