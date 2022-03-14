@@ -12,6 +12,14 @@ public class ProjectUrls {
   @JoinColumn
   private Projects project;
 
+  public long getId() {
+    return this.id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
   public String getUrl() {
     return this.url;
   }

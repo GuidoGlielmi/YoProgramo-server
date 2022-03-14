@@ -12,7 +12,7 @@ public class Projects {
   private String title;
   private String description;
   @ManyToMany
-  /* @JoinTable(
+  /* @Jointable(
     name = "project_technologies", 
     joinColumns = @JoinColumn(name = "project_id"), 
     inverseJoinColumns = @JoinColumn(name = "technology_id")) */

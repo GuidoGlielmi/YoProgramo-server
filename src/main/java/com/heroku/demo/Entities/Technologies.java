@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-
 public class Technologies {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,6 +12,11 @@ public class Technologies {
   private String name;
   @ManyToMany(mappedBy = "technologies")
   private List<Projects> projects;
+
+  public Technologies(long id, String name) {
+    this.id = id;
+    this.name = name;
+  }
 
   public long getid() {
     return this.id;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Users {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+  private int id;
   private String firstName;
   private String lastName;
   private String email;
@@ -14,11 +14,22 @@ public class Users {
   private String GithubUrl;
   private String aboutMe;
 
-  public long getid() {
+  public Users(int id, String firstName, String lastName, String email, String linkedInUrl, String GithubUrl,
+      String aboutMe) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.linkedInUrl = linkedInUrl;
+    this.GithubUrl = GithubUrl;
+    this.aboutMe = aboutMe;
+  }
+
+  public int getid() {
     return this.id;
   }
 
-  public void setid(long id) {
+  public void setid(int id) {
     this.id = id;
   }
 
