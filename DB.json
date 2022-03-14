@@ -1,0 +1,254 @@
+{
+  "user": {
+    "firstname": "Guido",
+    "lastname": "Glielmi",
+    "linkedinurl": "https://github.com/GuidoGlielmi",
+    "githuburl": "https://github.com/GuidoGlielmi",
+    "email": "guidoglielmi@gmail.com",
+    "aboutme": "I live in Argentina, in the city of Rosario. I discovered -not so long ago- the programming world through microntrollers using the legendary C language, which from I developed a passion for automating and problem solving."
+  },
+  "experiences": [
+    {
+      "title": "Radium Rocket",
+      "startdate": "09/2021",
+      "enddate": "01/2022",
+      "description": "MERN stack Bootcamp"
+    },
+    {
+      "title": "Argentina Programa",
+      "startdate": "11/2021",
+      "enddate": "05/2022",
+      "description": "Portfolio development"
+    },
+    {
+      "title": "Taller Corazón de Manzana",
+      "startdate": "03/2018",
+      "enddate": "01/2019",
+      "description": "Customer attention and inventory management"
+    }
+  ],
+  "education": [
+    {
+      "school": "Insituto Politécnico Superior",
+      "startdate": "04/2019",
+      "enddate": "Current",
+      "degree": "Technician in Electronic Systems"
+    },
+    {
+      "school": "Universidad Nacional de Rosario - Escuela de Música",
+      "startdate": "04/2016",
+      "enddate": "11/2019",
+      "degree": "Sound and Recording Technician"
+    }
+  ],
+  "skills": [
+    {
+      "title": "Proactive",
+      "abilitypercentage": 80,
+      "type": "skill"
+    },
+    {
+      "title": "Resilience",
+      "abilitypercentage": 80,
+      "type": "skill"
+    },
+    {
+      "title": "Active listening",
+      "abilitypercentage": 80,
+      "type": "skill"
+    },
+    {
+      "title": "Empathy",
+      "abilitypercentage": 80,
+      "type": "skill"
+    },
+    {
+      "title": "Español",
+      "abilitypercentage": 100,
+      "type": "language"
+    },
+    {
+      "title": "English",
+      "abilitypercentage": 80,
+      "type": "language"
+    },
+    {
+      "title": "日本語 / Japanese",
+      "abilitypercentage": 20,
+      "type": "language"
+    }
+  ],
+  "projects": [
+    {
+      "id": 0,
+      "title": "Radium Rocket",
+      "description": "Development of a fictional enterprise that matches applicants with open jobs from client companies"
+    },
+    {
+      "id": 1,
+      "title": "Argentina Programa",
+      "description": "Portfolio development"
+    },
+    {
+      "id": 2,
+      "title": "Aerolab Challenge",
+      "description": "E-commerce landing page"
+    }
+  ],
+  "projecturls": [
+    {
+      "url": "https://github.com/GuidoGlielmi/German-MindSet-app",
+      "project": "0"
+    },
+    {
+      "url": "https://github.com/GuidoGlielmi/David-MindSet-server",
+      "project": "0"
+    },
+    {
+      "url": "https://github.com/GuidoGlielmi/German-Mindset-server",
+      "project": "0"
+    },
+    {
+      "url": "https://github.com/GuidoGlielmi/YoProgramo-app",
+      "project": "1"
+    },
+    {
+      "url": "https://github.com/GuidoGlielmi/YoProgramo-server",
+      "project": "1"
+    },
+    {
+      "url": "https://github.com/GuidoGlielmi/Aerolab-challenge",
+      "project": "2"
+    }
+  ],
+  "technologies": [
+    {
+      "name": "Angular",
+      "id": 0
+    },
+    {
+      "name": "CSS3",
+      "id": 1
+    },
+    {
+      "name": "Express.js",
+      "id": 2
+    },
+    {
+      "name": "HTML5",
+      "id": 3
+    },
+    {
+      "name": "Java",
+      "id": 4
+    },
+    {
+      "name": "Javascript",
+      "id": 5
+    },
+    {
+      "name": "MongoDB",
+      "id": 6
+    },
+    {
+      "name": "Node.js",
+      "id": 7
+    },
+    {
+      "name": "PostgreSQL",
+      "id": 8
+    },
+    {
+      "name": "Redux",
+      "id": 9
+    },
+    {
+      "name": "Spring",
+      "id": 10
+    },
+    {
+      "name": "Typescript",
+      "id": 11
+    },
+    {
+      "name": "Next.js",
+      "id": 12
+    }
+  ],
+  "projecttechnologies": [
+    {
+      "project": 0,
+      "technology": 1
+    },
+
+    {
+      "project": 0,
+      "technology": 2
+    },
+    {
+      "project": 0,
+      "technology": 3
+    },
+    {
+      "project": 0,
+      "technology": 5
+    },
+    {
+      "project": 0,
+      "technology": 6
+    },
+    {
+      "project": 0,
+      "technology": 7
+    },
+    {
+      "project": 0,
+      "technology": 9
+    },
+    {
+      "project": 1,
+      "technology": 0
+    },
+
+    {
+      "project": 1,
+      "technology": 2
+    },
+    {
+      "project": 1,
+      "technology": 3
+    },
+    {
+      "project": 1,
+      "technology": 4
+    },
+    {
+      "project": 1,
+      "technology": 8
+    },
+    {
+      "project": 1,
+      "technology": 10
+    },
+    {
+      "project": 1,
+      "technology": 11
+    },
+    {
+      "project": 2,
+      "technology": 1
+    },
+    {
+      "project": 2,
+      "technology": 3
+    },
+    {
+      "project": 2,
+      "technology": 5
+    },
+    {
+      "project": 2,
+      "technology": 12
+    }
+  ]
+}
