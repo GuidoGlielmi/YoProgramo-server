@@ -1,18 +1,18 @@
 package com.heroku.demo.Controllers;
 
 import com.heroku.demo.Entities.Technologies;
-import com.heroku.demo.ServicesInterfaces.ITechsService;
+import com.heroku.demo.ServicesInterfaces.ITechService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-public class TechsController {
+@RestController("/techs")
+public class TechController {
   @Autowired
-  private ITechsService techService;
+  private ITechService techService;
 
-  @GetMapping("/techs")
-  public void addProject() {
+  @GetMapping
+  public void addProject(Technologies tech) {
     /* techService.addTech(new Technologies(0, "React")); */
   }
 

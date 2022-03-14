@@ -4,6 +4,6 @@ import com.heroku.demo.Entities.Skills;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SkillsRepo extends JpaRepository<Skills, Long> {
+public interface SkillRepo extends JpaRepository<Skills, Long> {
 
 }

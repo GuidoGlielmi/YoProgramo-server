@@ -2,8 +2,7 @@ package com.heroku.demo.ServicesInterfaces;
 
 import java.util.List;
 
-import com.heroku.demo.DTO.ProjectDto;
-import com.heroku.demo.Entities.*;
+import com.heroku.demo.Entities.Users;
 
 import org.springframework.stereotype.Service;
 

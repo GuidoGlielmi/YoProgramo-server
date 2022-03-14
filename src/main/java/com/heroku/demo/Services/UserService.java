@@ -2,9 +2,8 @@ package com.heroku.demo.Services;
 
 import java.util.List;
 
-import com.heroku.demo.DTO.ProjectDto;
-import com.heroku.demo.Entities.*;
-import com.heroku.demo.Repositories.*;
+import com.heroku.demo.Entities.Users;
+import com.heroku.demo.Repositories.UserRepo;
 import com.heroku.demo.ServicesInterfaces.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements IUserService {
   @Autowired
-  UserRepository userRepo;
-  @Autowired
-  ProjectRepo projectRepo;
+  UserRepo userRepo;
 
   @Override
   public Users getUser() {

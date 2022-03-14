@@ -4,5 +4,5 @@ import com.heroku.demo.Entities.Users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<Users, Long> {
+public interface UserRepo extends JpaRepository<Users, Long> {
 }
