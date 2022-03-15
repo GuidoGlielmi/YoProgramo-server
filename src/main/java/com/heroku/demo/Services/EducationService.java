@@ -2,6 +2,7 @@ package com.heroku.demo.Services;
 
 import com.heroku.demo.ServicesInterfaces.IEducationService;
 
+import java.util.UUID;
 import java.util.List;
 
 import com.heroku.demo.Entities.Education;
@@ -21,18 +22,41 @@ public class EducationService implements IEducationService {
   }
 
   @Override
-  public void addEducation(Education education) {
-    educationRepo.save(education);
+  public String addEducation(Education education) {
+    try {
+      educationRepo.save(education);
+      return "Education item added successfully";
+    } catch (Exception e) {
+      return e.getMessage();
+    }
+
   }
 
   @Override
-  public void updateEducation(Education education, long id) {
-    // TODO Auto-generated method stub
+  public Education updateEducation(Education education) {
+    UUID id = education.getEducation_id();
+    Education selectedEducation = educationRepo.findById(id).orElseThrow();
+    if (!education.getSchool().isBlank()) {
+      selectedEducation.setSchool(education.getSchool());
+    }
+    if (!education.getStartDate().isBlank()) {
+      selectedEducation.setStartDate(education.getStartDate());
+    }
+    if (!education.getEndDate().isBlank()) {
+      selectedEducation.setEndDate(education.getEndDate());
+    }
+    if (!education.getDegree().isBlank()) {
+      selectedEducation.setDegree(education.getDegree());
+    }
+    educationRepo.save(selectedEducation);
+    return selectedEducation;
   }
 
   @Override
-  public void deleteEducation(long id) {
+  public String deleteEducation(UUID id) {
+    educationRepo.findById(id).orElseThrow();
     educationRepo.deleteById(id);
+    return "Education item deleted successfully";
   }
 
 }

@@ -1,5 +1,6 @@
 package com.heroku.demo.ServicesInterfaces;
 
+import java.util.UUID;
 import java.util.List;
 
 import com.heroku.demo.Entities.Education;
@@ -7,9 +8,9 @@ import com.heroku.demo.Entities.Education;
 public interface IEducationService {
   public List<Education> getEducation();
 
-  public void addEducation(Education education);
+  public String addEducation(Education education);
 
-  public void updateEducation(Education education, long id);
+  public Education updateEducation(Education education);
 
-  public void deleteEducation(long id);
+  public String deleteEducation(UUID id);
 }

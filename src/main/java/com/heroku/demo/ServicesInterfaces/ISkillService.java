@@ -1,5 +1,6 @@
 package com.heroku.demo.ServicesInterfaces;
 
+import java.util.UUID;
 import java.util.List;
 
 import com.heroku.demo.Entities.Skills;
@@ -7,10 +8,10 @@ import com.heroku.demo.Entities.Skills;
 public interface ISkillService {
   public List<Skills> getSkills();
 
-  public void addSkill(Skills skill);
+  public String addSkill(Skills skill);
 
-  public void updateSkill(Skills skill, long id);
+  public Skills updateSkill(Skills skill);
 
-  public void deleteSkill(long id);
+  public String deleteSkill(UUID id);
 
 }

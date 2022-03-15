@@ -1,5 +1,6 @@
 package com.heroku.demo.ServicesInterfaces;
 
+import java.util.UUID;
 import com.heroku.demo.Entities.Users;
 
 import org.springframework.stereotype.Service;
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Service;
 public interface IUserService {
   public Users getUsers();
 
-  public void addUser(Users user);
+  public String addUser(Users user);
 
-  public void updateUser(Users user, long id);
+  public Users updateUser(Users user);
 
-  public void deleteUser(long id);
+  public String deleteUser(UUID id);
 }

@@ -1,5 +1,6 @@
 package com.heroku.demo.Entities;
 
+import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Projects {
   @Id
   @SequenceGenerator(name = "projects_id_seq", sequenceName = "projects_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+  private UUID id;
   private String title;
   private String description;
   @ManyToMany
@@ -19,14 +20,14 @@ public class Projects {
     joinColumns = @JoinColumn(name = "project_id"), 
     inverseJoinColumns = @JoinColumn(name = "technology_id")) */
   private List<Technologies> technologies = new ArrayList<Technologies>();
-  @OneToMany(mappedBy = "project")
+  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL) // cascade removes the urls when removing the related project
   private List<ProjectUrl> urls = new ArrayList<ProjectUrl>();
 
-  public long getid() {
+  public UUID getid() {
     return this.id;
   }
 
-  public void setid(long id) {
+  public void setid(UUID id) {
     this.id = id;
   }
 
@@ -46,15 +47,15 @@ public class Projects {
     this.description = description;
   }
 
-  public List<Technologies> getTechnologies() {
+  public List<Technologies> getTechs() {
     return this.technologies;
   }
 
-  public void setTechnologies(List<Technologies> technologies) {
+  public void setTechs(List<Technologies> technologies) {
     this.technologies = technologies;
   }
 
-  public void addTechnology(Technologies tech) {
+  public void addTech(Technologies tech) {
     this.technologies.add(tech);
   }
 

@@ -1,5 +1,6 @@
 package com.heroku.demo.Entities;
 
+import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +13,17 @@ public class Technologies {
   @Id
   @SequenceGenerator(name = "technologies_id_seq", sequenceName = "technologies_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
-  private String name;
+  private UUID id;
+  private String name = "";
   @JsonIgnore // This avoids recursion
   @ManyToMany(mappedBy = "technologies")
   private List<Projects> projects = new ArrayList<Projects>();
 
-  public long getid() {
+  public UUID getId() {
     return this.id;
   }
 
-  public void setid(long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 

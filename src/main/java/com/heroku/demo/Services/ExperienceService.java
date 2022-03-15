@@ -1,5 +1,6 @@
 package com.heroku.demo.Services;
 
+import java.util.UUID;
 import java.util.List;
 
 import com.heroku.demo.Entities.Experiences;
@@ -20,19 +21,41 @@ public class ExperienceService implements IExperiencesService {
   }
 
   @Override
-  public void addExperience(Experiences experience) {
+  public String addExperience(Experiences experience) {
+    try {
+      expRepo.save(experience);
+      return "Experience item added successfully";
+    } catch (Exception e) {
+      return e.getMessage();
+    }
+  }
+
+  @Override
+  public Experiences updateExperience(Experiences experience) {
+    UUID id = experience.getExperience_id();
+    Experiences selectedExperience = expRepo.findById(id).orElseThrow();
+    if (!experience.getTitle().isBlank()) {
+      selectedExperience.setTitle(experience.getTitle());
+    }
+    if (!experience.getStartDate().isBlank()) {
+      selectedExperience.setStartDate(experience.getStartDate());
+    }
+    if (!experience.getEndDate().isBlank()) {
+      selectedExperience.setEndDate(experience.getEndDate());
+    }
+    if (!experience.getDescription().isBlank()) {
+      selectedExperience.setDescription(experience.getDescription());
+    }
+    expRepo.save(selectedExperience);
+    return selectedExperience;
 
   }
 
   @Override
-  public void updateExperience(Experiences experience, long id) {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void deleteExperience(long id) {
+  public String deleteExperience(UUID id) {
+    expRepo.findById(id).orElseThrow();
     expRepo.deleteById(id);
+    return "Experience item deleted successfully";
   }
 
 }

@@ -1,5 +1,7 @@
 package com.heroku.demo.Entities;
 
+import java.util.UUID;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,18 +9,18 @@ public class Education {
   @Id
   @SequenceGenerator(name = "education_id_seq", sequenceName = "education_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long education_id;
+  private UUID education_id;
 
-  private String school;
-  private String startDate;
-  private String endDate;
-  private String degree;
+  private String school = "";
+  private String startDate = "";
+  private String endDate = "";
+  private String degree = "";
 
-  public long geteducation_id() {
+  public UUID getEducation_id() {
     return this.education_id;
   }
 
-  public void seteducation_id(long education_id) {
+  public void setEducation_id(UUID education_id) {
     this.education_id = education_id;
   }
 

@@ -1,6 +1,7 @@
 package com.heroku.demo.Controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.heroku.demo.Entities.Education;
 
@@ -21,18 +22,18 @@ public class EducationController {
   }
 
   @PostMapping
-  public void addEducation(Education education) {
-    educationService.addEducation(education);
+  public String addEducation(@RequestBody Education education) {
+    return educationService.addEducation(education);
   }
 
   @PutMapping
-  public void updateEducation(Education education, long id) {
-    educationService.updateEducation(education, id);
+  public Education updateEducation(@RequestBody Education education) {
+    return educationService.updateEducation(education);
   }
 
-  @DeleteMapping
-  public void deleteEducation(long id) {
-    educationService.deleteEducation(id);
+  @DeleteMapping("/{id}")
+  public String deleteEducation(@PathVariable UUID id) {
+    return educationService.deleteEducation(id);
   }
 
 }

@@ -1,5 +1,7 @@
 package com.heroku.demo.Entities;
 
+import java.util.UUID;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,15 +9,15 @@ public class Users {
   @Id
   @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int id;
-  private String firstName;
-  private String lastName;
-  private String email;
-  private String linkedInUrl;
-  private String githubUrl;
-  private String aboutMe;
+  private UUID id;
+  private String firstName = "";
+  private String lastName = "";
+  private String email = "";
+  private String linkedInUrl = "";
+  private String githubUrl = "";
+  private String aboutMe = "";
 
-  public Users(int id, String firstName, String lastName, String email, String linkedInUrl, String githubUrl,
+  public Users(UUID id, String firstName, String lastName, String email, String linkedInUrl, String githubUrl,
       String aboutMe) {
     this.id = id;
     this.firstName = firstName;
@@ -26,11 +28,11 @@ public class Users {
     this.aboutMe = aboutMe;
   }
 
-  public int getid() {
+  public UUID getId() {
     return this.id;
   }
 
-  public void setid(int id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 

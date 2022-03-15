@@ -1,5 +1,6 @@
 package com.heroku.demo.ServicesInterfaces;
 
+import java.util.UUID;
 import java.util.List;
 
 import com.heroku.demo.Entities.Experiences;
@@ -7,10 +8,10 @@ import com.heroku.demo.Entities.Experiences;
 public interface IExperiencesService {
   public List<Experiences> getExperiences(Experiences experience);
 
-  public void addExperience(Experiences experience);
+  public String addExperience(Experiences experience);
 
-  public void updateExperience(Experiences experience, long id);
+  public Experiences updateExperience(Experiences experience);
 
-  public void deleteExperience(long id);
+  public String deleteExperience(UUID id);
 
 }

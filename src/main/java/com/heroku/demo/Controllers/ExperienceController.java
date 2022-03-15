@@ -1,5 +1,6 @@
 package com.heroku.demo.Controllers;
 
+import java.util.UUID;
 import java.util.List;
 
 import com.heroku.demo.Entities.Experiences;
@@ -21,17 +22,17 @@ public class ExperienceController {
   }
 
   @PostMapping
-  public void addExperience(Experiences experience) {
-    experienceService.addExperience(experience);
+  public String addExperience(@RequestBody Experiences experience) {
+    return experienceService.addExperience(experience);
   }
 
   @PutMapping
-  public void updateExperience(Experiences experience, long id) {
-    experienceService.updateExperience(experience, id);
+  public void updateExperience(@RequestBody Experiences experience) {
+    experienceService.updateExperience(experience);
   }
 
-  @DeleteMapping
-  public void deleteExperience(long id) {
+  @DeleteMapping("/{id}")
+  public void deleteExperience(@PathVariable UUID id) {
     experienceService.deleteExperience(id);
   }
 }

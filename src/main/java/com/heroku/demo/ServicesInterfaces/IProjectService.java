@@ -4,22 +4,30 @@ import com.heroku.demo.Entities.Projects;
 import com.heroku.demo.Entities.ProjectUrl;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.heroku.demo.DTO.ProjectDto;
 
 public interface IProjectService {
+
   public List<Projects> getProjects();
 
-  public void addProject(Projects project);
+  public String addProject(ProjectDto project);
 
-  public void addProjectTech(long projectId, long techId);
+  public Projects updateProject(ProjectDto project);
 
-  public void addProjectUrl(long projectId, long urlId);
+  public String deleteProject(UUID projectId);
 
-  public void addUrl(ProjectUrl url);
+  public String addTechToProject(UUID projectId, UUID techId);
 
-  public void addUrlToProject(long projectId, ProjectUrl url);
+  public String removeTechFromProject(UUID id, UUID techId);
 
-  public void addCompleteProject(ProjectDto project);
+  public List<ProjectUrl> getUrls();
+
+  public String addUrl(ProjectUrl url);
+
+  public String deleteUrl(UUID id);
+
+  public ProjectUrl updateUrl(ProjectUrl url);
 
 }

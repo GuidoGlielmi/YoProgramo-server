@@ -1,5 +1,6 @@
 package com.heroku.demo.Entities;
 
+import java.util.UUID;
 import javax.persistence.*;
 
 @Entity
@@ -7,17 +8,17 @@ public class Skills {
   @Id
   @SequenceGenerator(name = "skills_id_seq", sequenceName = "skills_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long skill_id;
+  private UUID skill_id;
 
-  private String name;
-  private int abilityPercentage;
-  private String type;
+  private String name = "";
+  private int abilityPercentage = 0;
+  private String type = "";
 
-  public long getSkill_id() {
+  public UUID getSkill_id() {
     return this.skill_id;
   }
 
-  public void setSkill_id(long skill_id) {
+  public void setSkill_id(UUID skill_id) {
     this.skill_id = skill_id;
   }
 

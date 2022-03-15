@@ -1,5 +1,8 @@
 package com.heroku.demo.Controllers;
 
+import java.util.List;
+import java.util.UUID;
+
 import com.heroku.demo.Entities.Skills;
 
 import com.heroku.demo.ServicesInterfaces.ISkillService;
@@ -14,22 +17,22 @@ public class SkillsController {
   private ISkillService skillsService;
 
   @GetMapping
-  public void getSkills() {
-    skillsService.getSkills();
+  public List<Skills> getSkills() {
+    return skillsService.getSkills();
   }
 
   @PostMapping
-  public void addSkill(Skills skill) {
+  public void addSkill(@RequestBody Skills skill) {
     skillsService.addSkill(skill);
   }
 
   @PutMapping
-  public void updateSkill(Skills skill, long id) {
-    skillsService.updateSkill(skill, id);
+  public void updateSkill(@RequestBody Skills skill) {
+    skillsService.updateSkill(skill);
   }
 
-  @DeleteMapping
-  public void deleteSkill(long id) {
+  @DeleteMapping("/{id}")
+  public void deleteSkill(@PathVariable UUID id) {
     skillsService.deleteSkill(id);
   }
 
