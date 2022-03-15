@@ -1,7 +1,5 @@
 package com.heroku.demo.Services;
 
-import java.util.List;
-
 import com.heroku.demo.Entities.Users;
 import com.heroku.demo.Repositories.UserRepo;
 import com.heroku.demo.ServicesInterfaces.IUserService;
@@ -15,7 +13,7 @@ public class UserService implements IUserService {
   UserRepo userRepo;
 
   @Override
-  public Users getUser() {
+  public Users getUsers() {
     return userRepo.findAll().get(0);
   }
 
@@ -23,44 +21,16 @@ public class UserService implements IUserService {
   public void addUser(Users user) {
     userRepo.save(user);
   }
-  /* 
+
   @Override
-  public void addProject(Projects project, ProjectTechnologies techs, ProjectUrls urls) {
-  
+  public void updateUser(Users user, long id) {
+    // TODO Auto-generated method stub
+
   }
-  
+
   @Override
-  public void addTechnology(Projects project, ProjectTechnologies techs, ProjectUrls urls) {
-  
+  public void deleteUser(long id) {
+    userRepo.deleteById(id);
+
   }
-  
-  @Override
-  public void addProjectUrl(Projects project, ProjectTechnologies techs, ProjectUrls urls) {
-  
-  }
-  
-  @Override
-  public Object[] getProjects() {
-     List<Projects> projects = projectRepo.findAll();
-    List<ProjectTechnologies> technologies = projectTechnologiesRepo.findAll();
-    List<ProjectUrls> urls = projectUrlsRepo.findAll();
-    
-    return projectRepo.getProjects();
-  }
-  
-  @Override
-  public List<Experiences> getExperiences() {
-    return null;
-  }
-  
-  @Override
-  public List<Education> getEducation() {
-    return null;
-  }
-  
-  @Override
-  public List<Skills> getSkills() {
-    return null;
-  }
-   */
 }

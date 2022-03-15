@@ -1,15 +1,17 @@
 package com.heroku.demo.DTO;
 
+import java.util.List;
+
 import com.heroku.demo.Entities.*;
 
 public class ProjectDto {
   private Projects project;
-  private ProjectTechnologies technologies;
-  private ProjectUrls urls;
+  private List<ProjectUrl> urls;
+  private List<Long> techs;
 
-  public ProjectDto(Projects project, ProjectTechnologies technologies, ProjectUrls urls) {
+  public ProjectDto(Projects project, List<Long> techs, List<ProjectUrl> urls) {
     this.project = project;
-    this.technologies = technologies;
+    this.techs = techs;
     this.urls = urls;
   }
 
@@ -21,19 +23,19 @@ public class ProjectDto {
     this.project = project;
   }
 
-  public ProjectTechnologies getTechnologies() {
-    return this.technologies;
+  public List<Long> getTechs() {
+    return this.techs;
   }
 
-  public void setTechnologies(ProjectTechnologies technologies) {
-    this.technologies = technologies;
+  public void setTechs(List<Long> techs) {
+    this.techs = techs;
   }
 
-  public ProjectUrls getUrls() {
+  public List<ProjectUrl> getUrls() {
     return this.urls;
   }
 
-  public void setUrls(ProjectUrls urls) {
+  public void setUrls(List<ProjectUrl> urls) {
     this.urls = urls;
   }
 

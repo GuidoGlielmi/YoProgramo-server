@@ -5,23 +5,24 @@ import javax.persistence.*;
 @Entity
 public class Users {
   @Id
+  @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
   private String firstName;
   private String lastName;
   private String email;
   private String linkedInUrl;
-  private String GithubUrl;
+  private String githubUrl;
   private String aboutMe;
 
-  public Users(int id, String firstName, String lastName, String email, String linkedInUrl, String GithubUrl,
+  public Users(int id, String firstName, String lastName, String email, String linkedInUrl, String githubUrl,
       String aboutMe) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.linkedInUrl = linkedInUrl;
-    this.GithubUrl = GithubUrl;
+    this.githubUrl = githubUrl;
     this.aboutMe = aboutMe;
   }
 
@@ -66,11 +67,11 @@ public class Users {
   }
 
   public String getGithubUrl() {
-    return this.GithubUrl;
+    return this.githubUrl;
   }
 
   public void setGithubUrl(String GithubUrl) {
-    this.GithubUrl = GithubUrl;
+    this.githubUrl = GithubUrl;
   }
 
   public String getAboutMe() {

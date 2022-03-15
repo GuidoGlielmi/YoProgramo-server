@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Experiences {
   @Id
+  @SequenceGenerator(name = "experiences_id_seq", sequenceName = "experiences_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long experience_id;
   private String title;

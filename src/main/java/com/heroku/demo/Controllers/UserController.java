@@ -6,14 +6,29 @@ import com.heroku.demo.ServicesInterfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/users")
+@RestController
+@RequestMapping("users")
 public class UserController {
   @Autowired
   private IUserService userService;
 
   @GetMapping
-  public void addUser(Users user) {
-    /* userService.addUser(new Users(0, "Guido", "Glielmi", "guidoglielmi@gmail.com", "asdasd", "asdasd", "asdasd")); */
+  public Users getUsers() {
+    return userService.getUsers();
   }
 
+  @PostMapping
+  public void addUser(Users user) {
+    userService.addUser(user);
+  }
+
+  @PutMapping
+  public void updateUser(@RequestBody Users user, @PathVariable long id) {
+    userService.updateUser(user, id);
+  }
+
+  @DeleteMapping
+  public void addUser(@PathVariable long id) {
+    userService.deleteUser(id);
+  }
 }

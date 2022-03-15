@@ -1,5 +1,7 @@
 package com.heroku.demo.Controllers;
 
+import java.util.List;
+
 import com.heroku.demo.Entities.Experiences;
 
 import com.heroku.demo.ServicesInterfaces.IExperiencesService;
@@ -7,14 +9,29 @@ import com.heroku.demo.ServicesInterfaces.IExperiencesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/experiences")
+@RestController
+@RequestMapping("experiences")
 public class ExperienceController {
   @Autowired
   private IExperiencesService experienceService;
 
   @GetMapping
-  public void addExperience(Experiences experience) {
-    /* techService.addTech(new Technologies(0, "React")); */
+  public List<Experiences> getExperiences(Experiences experience) {
+    return experienceService.getExperiences(experience);
   }
 
+  @PostMapping
+  public void addExperience(Experiences experience) {
+    experienceService.addExperience(experience);
+  }
+
+  @PutMapping
+  public void updateExperience(Experiences experience, long id) {
+    experienceService.updateExperience(experience, id);
+  }
+
+  @DeleteMapping
+  public void deleteExperience(long id) {
+    experienceService.deleteExperience(id);
+  }
 }

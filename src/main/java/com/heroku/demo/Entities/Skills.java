@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Skills {
   @Id
+  @SequenceGenerator(name = "skills_id_seq", sequenceName = "skills_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long skill_id;
 

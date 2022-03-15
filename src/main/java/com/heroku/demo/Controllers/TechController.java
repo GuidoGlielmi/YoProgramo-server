@@ -6,14 +6,30 @@ import com.heroku.demo.ServicesInterfaces.ITechService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/techs")
+@RestController
+@RequestMapping("techs")
 public class TechController {
   @Autowired
   private ITechService techService;
 
   @GetMapping
-  public void addProject(Technologies tech) {
-    /* techService.addTech(new Technologies(0, "React")); */
+  public void getProjects() {
+    techService.getTechs();
+  }
+
+  @PostMapping
+  public void addTech(@RequestBody Technologies tech) {
+    techService.addTech(tech);
+  }
+
+  @PutMapping
+  public void updateTech(@RequestBody Technologies tech, @PathVariable long id) {
+    techService.updateTech(tech, id);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deleteTech(@PathVariable long id) {
+    techService.deleteTech(id);
   }
 
 }

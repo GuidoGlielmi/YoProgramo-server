@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Education {
   @Id
+  @SequenceGenerator(name = "education_id_seq", sequenceName = "education_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long education_id;
 

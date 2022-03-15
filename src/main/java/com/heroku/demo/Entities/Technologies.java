@@ -1,22 +1,22 @@
 package com.heroku.demo.Entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Technologies {
   @Id
+  @SequenceGenerator(name = "technologies_id_seq", sequenceName = "technologies_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private String name;
+  @JsonIgnore // This avoids recursion
   @ManyToMany(mappedBy = "technologies")
-  private List<Projects> projects;
-
-  public Technologies(long id, String name) {
-    this.id = id;
-    this.name = name;
-  }
+  private List<Projects> projects = new ArrayList<Projects>();
 
   public long getid() {
     return this.id;
@@ -40,6 +40,10 @@ public class Technologies {
 
   public void setProjects(List<Projects> projects) {
     this.projects = projects;
+  }
+
+  public void addProject(Projects project) {
+    this.projects.add(project);
   }
 
 }

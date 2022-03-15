@@ -2,14 +2,18 @@ package com.heroku.demo.Entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class ProjectUrls {
+public class ProjectUrl {
   @Id
+  @SequenceGenerator(name = "project_urls_id_seq", sequenceName = "project_urls_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   private String url;
-  @ManyToOne
-  @JoinColumn
+  @JsonIgnore
+  @ManyToOne(cascade = CascadeType.ALL) // with just @ManyToOne the corresponding table is created but urls are not included in the projects themselves
+  // @JoinColumn(name = "project_id", referencedColumnName = "id")
   private Projects project;
 
   public long getId() {
