@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("projects")
 public class ProjectController {
+
   @Autowired
   private IProjectService projectService;
 
@@ -24,8 +25,13 @@ public class ProjectController {
   }
 
   @PostMapping
-  public Object addProject(@RequestBody ProjectDto project) {
+  public Projects addProject(@RequestBody ProjectDto project) {
     return projectService.addProject(project);
+  }
+
+  @PutMapping
+  public Projects updateProject(@RequestBody ProjectDto project) {
+    return projectService.updateProject(project);
   }
 
   @DeleteMapping("/{id}")
@@ -45,12 +51,12 @@ public class ProjectController {
 
   @GetMapping("/url")
   public List<ProjectUrl> getUrls() {
-    for (ProjectUrl p : projectService.getUrls()) {
-      System.out.println(p.getUrl());
-      System.out.println(p.getId());
-      System.out.println(p.getProject().getId());
-    }
     return projectService.getUrls();
+  }
+
+  @PostMapping("/url")
+  public ProjectUrl addUrl(@RequestBody ProjectUrl url) {
+    return projectService.addUrl(url);
   }
 
   @PutMapping("/url")
@@ -58,15 +64,9 @@ public class ProjectController {
     return projectService.updateUrl(url);
   }
 
-  @PostMapping("/url")
-  public ProjectUrl addUrl(@RequestParam UUID projectId, @RequestBody ProjectUrl url) {
-    return projectService.addUrl(projectId, url);
-  }
-
   @DeleteMapping("/url/{id}")
   public List<ProjectUrl> deleteUrl(@PathVariable UUID id) {
     return projectService.deleteUrl(id);
   }
 
-  // return new ResponseEntity<>(projectService.addProjectTech(techId, projectId), HttpStatus.CREATED)
 }

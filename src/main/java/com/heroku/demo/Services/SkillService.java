@@ -28,24 +28,22 @@ public class SkillService implements ISkillService {
   @Override
   public Skills updateSkill(Skills skill) {
     UUID id = skill.getId();
-    Skills selectedSkill = skillRepo.findById(id).orElseThrow();
+    Skills foundSkill = skillRepo.findById(id).orElseThrow();
     if (!skill.getName().isBlank()) {
-      selectedSkill.setName(skill.getName());
+      foundSkill.setName(skill.getName());
     }
     if (!skill.getType().isBlank()) {
-      selectedSkill.setType(skill.getType());
+      foundSkill.setType(skill.getType());
     }
     if (skill.getAbilityPercentage() != 0) {
-      selectedSkill.setAbilityPercentage(skill.getAbilityPercentage());
+      foundSkill.setAbilityPercentage(skill.getAbilityPercentage());
     }
-    skillRepo.save(selectedSkill);
-    return selectedSkill;
+    return skillRepo.save(foundSkill);
   }
 
   @Override
   public String deleteSkill(UUID id) {
-    skillRepo.findById(id).orElseThrow();
-    skillRepo.deleteById(id);
+    skillRepo.delete(skillRepo.findById(id).orElseThrow());
     return "Skill item deleted successfully";
   }
 

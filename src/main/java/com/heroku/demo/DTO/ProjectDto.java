@@ -7,13 +7,12 @@ import com.heroku.demo.Entities.*;
 
 public class ProjectDto {
   private Projects project;
-  private List<ProjectUrl> urls;
 
   private List<UUID> techs;
 
-  public ProjectDto(Projects project, List<ProjectUrl> urls, List<UUID> techs) {
+  public ProjectDto(Projects project, List<UUID> techs) {
+    //The constructor is necessary for building the DTO
     this.project = project;
-    this.urls = urls;
     this.techs = techs;
   }
 
@@ -25,20 +24,12 @@ public class ProjectDto {
     this.project = project;
   }
 
-  public List<UUID> getTechs() {
+  public List<UUID> getTechsIds() {
     return this.techs;
   }
 
-  public void setTechs(List<UUID> techs) {
+  public void setTechsIds(List<UUID> techs) {
     this.techs = techs;
-  }
-
-  public List<ProjectUrl> getUrls() {
-    return this.urls;
-  }
-
-  public void setUrls(List<ProjectUrl> urls) {
-    this.urls = urls;
   }
 
 }

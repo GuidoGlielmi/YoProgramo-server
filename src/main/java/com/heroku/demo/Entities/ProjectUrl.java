@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.lang.NonNull;
 
@@ -18,6 +19,18 @@ public class ProjectUrl {
   @ManyToOne(fetch = FetchType.LAZY) // with just @ManyToOne the corresponding table is created but urls are not included in the projects themselves
   @JsonIgnore
   private Projects project;
+
+  @JsonInclude()
+  @Transient
+  private UUID projectId;
+
+  /* public ProjectUrl() {
+  }
+  
+  public ProjectUrl(String url, UUID projectId) {
+    this.url = url;
+    this.projectId = projectId;
+  } */
 
   // Every function starting with "get" gets included when calling findAll()
   public UUID getId() {
@@ -45,7 +58,7 @@ public class ProjectUrl {
   }
 
   public UUID getProjectId() {
-    return project.getId();
+    return project != null ? project.getId() : projectId;
   }
 
 }

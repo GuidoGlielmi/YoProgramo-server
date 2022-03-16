@@ -13,7 +13,7 @@ public interface IProjectService {
 
   public List<Projects> getProjects();
 
-  public UUID addProject(ProjectDto project);
+  public Projects addProject(ProjectDto project);
 
   public Projects updateProject(ProjectDto project);
 
@@ -25,7 +25,7 @@ public interface IProjectService {
 
   public List<ProjectUrl> getUrls();
 
-  public ProjectUrl addUrl(UUID projectId, ProjectUrl url);
+  public ProjectUrl addUrl(ProjectUrl url);
 
   public List<ProjectUrl> deleteUrl(UUID id);
 

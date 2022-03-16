@@ -1,5 +1,6 @@
 package com.heroku.demo.Entities;
 
+// import java.io.Serializable;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,8 @@ public class Projects {
   private String description;
   @ManyToMany
   // Project IS the owner, so when deleting the project, it will automatically be removed from every single tech's project list
-  private List<Technologies> technologies = new ArrayList<Technologies>();
-  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // cascade removes the urls when removing the related project. With lazy initialization approach, it will get initialized only when explicitly calling it, using a getter or some other method.
+  private List<Technologies> techs = new ArrayList<Technologies>();
+  @OneToMany(mappedBy = "project", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY) // cascade removes the urls when removing the related project. With lazy initialization approach, it will get initialized only when explicitly calling it, using a getter or some other method.
   private List<ProjectUrl> urls = new ArrayList<ProjectUrl>();
 
   /* @JoinColumn creates a column in the many side of the relation with the given name that references the PK of the parent entity, unless referencedColumnName is specified */
@@ -46,15 +47,15 @@ public class Projects {
   }
 
   public List<Technologies> getTechs() {
-    return this.technologies;
+    return this.techs;
   }
 
   public void setTechs(List<Technologies> technologies) {
-    this.technologies = technologies;
+    this.techs = technologies;
   }
 
   public void addTech(Technologies tech) {
-    this.technologies.add(tech);
+    this.techs.add(tech);
   }
 
   public List<ProjectUrl> getUrls() {

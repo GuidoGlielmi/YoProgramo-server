@@ -10,41 +10,57 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Technologies {
-  @Id
-  @GeneratedValue
-  private UUID id;
-  private String name = "";
-  @JsonIgnore // This avoids recursion
-  @ManyToMany(mappedBy = "technologies") //the mapped entity is NOT the owner,
-  //so, when deleting, it's necessary to delete it from all the users and from the techs itself
-  private List<Projects> projects = new ArrayList<Projects>();
+	@Id
+	@GeneratedValue
+	private UUID id;
+	private String name = "";
+	@JsonIgnore // This avoids recursion, can't be transfered via http
+	@ManyToMany(mappedBy = "techs") //the mapped entity is NOT the owner,
+	//so, when deleting, it's necessary to delete it from all the users and from the techs itself
+	private List<Projects> projects = new ArrayList<Projects>();
 
-  public UUID getId() {
-    return this.id;
-  }
+	public Technologies() {
+	}
 
-  public void setId(UUID id) {
-    this.id = id;
-  }
+	public Technologies(UUID id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
-  public String getName() {
-    return this.name;
-  }
+	public UUID getId() {
+		return this.id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
-  public List<Projects> getProjects() {
-    return this.projects;
-  }
+	public String getName() {
+		return this.name;
+	}
 
-  public void setProjects(List<Projects> projects) {
-    this.projects = projects;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public void addProject(Projects project) {
-    this.projects.add(project);
-  }
+	public List<Projects> getProjects() {
+		return this.projects;
+	}
+
+	public void setProjects(List<Projects> projects) {
+		this.projects = projects;
+	}
+
+	public void addProject(Projects project) {
+		this.projects.add(project);
+	}
+
+	public List<UUID> getProjectsId() {
+		List<UUID> projectsId = new ArrayList<>();
+		for (Projects project : projects) {
+			projectsId.add(project.getId());
+		}
+		return projectsId;
+	}
 
 }

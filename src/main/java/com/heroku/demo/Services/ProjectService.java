@@ -31,27 +31,27 @@ public class ProjectService implements IProjectService {
   }
 
   @Override
-  public UUID addProject(ProjectDto project) {
-    Projects newProject = project.getProject();
-    for (UUID techId : project.getTechs()) {
+  public Projects addProject(ProjectDto projectDto) {
+    Projects newProject = projectDto.getProject();
+    for (UUID techId : projectDto.getTechsIds()) {
       Technologies tech = techRepo.findById(techId).orElseThrow();
       newProject.addTech(tech);
     }
     Projects persistedProject = projectRepo.save(newProject);
-    for (ProjectUrl url : project.getUrls()) {
-      url.setProject(persistedProject);
-      urlRepo.save(url);
+    for (ProjectUrl newUrl : newProject.getUrls()) {
+      newUrl.setProject(persistedProject);
+      urlRepo.save(newUrl);
     }
-    return persistedProject.getId();
+    return persistedProject;// with "cascadeType=ALL" the urls are saved automatically
   }
 
   @Override
   public Projects updateProject(ProjectDto projectDto) {
-    Projects outdatedProject = projectRepo.findById(projectDto.getProject().getId()).orElseThrow();
+    Projects foundProject = projectRepo.findById(projectDto.getProject().getId()).orElseThrow();
     Projects updatedProject = projectDto.getProject();
-    outdatedProject.setTechs(updatedProject.getTechs());
-    outdatedProject.setUrls(updatedProject.getUrls());
-    return projectRepo.save(outdatedProject);
+    foundProject.setTechs(updatedProject.getTechs());
+    foundProject.setUrls(updatedProject.getUrls());
+    return projectRepo.save(foundProject);
   }
 
   @Override
@@ -65,13 +65,13 @@ public class ProjectService implements IProjectService {
 
   @Override
   public List<Technologies> addTechToProject(UUID projectId, UUID techId) {
-    Projects selectedProject = projectRepo.findById(projectId).orElseThrow();
-    Technologies selectedTech = techRepo.findById(techId).orElseThrow();
-    selectedProject.addTech(selectedTech);
-    selectedTech.addProject(selectedProject);
-    projectRepo.save(selectedProject);
-    techRepo.save(selectedTech);
-    return selectedProject.getTechs();
+    Projects foundProject = projectRepo.findById(projectId).orElseThrow();
+    Technologies foundTech = techRepo.findById(techId).orElseThrow();
+    foundProject.addTech(foundTech);
+    foundTech.addProject(foundProject);
+    projectRepo.save(foundProject);
+    techRepo.save(foundTech);
+    return foundProject.getTechs();
   }
 
   @Override
@@ -95,24 +95,30 @@ public class ProjectService implements IProjectService {
   }
 
   @Override
-  public ProjectUrl addUrl(UUID projectId, ProjectUrl url) {
-    Projects selectedProject = projectRepo.findById(projectId).orElseThrow();
-    url.setProject(selectedProject);
-    return urlRepo.save(url);
+  public ProjectUrl addUrl(ProjectUrl newUrl) {
+    Projects foundProject = projectRepo.findById(newUrl.getProjectId()).orElseThrow();
+    newUrl.setProject(foundProject);
+    return urlRepo.save(newUrl);
   }
 
   @Override
   public ProjectUrl updateUrl(ProjectUrl url) {
-    ProjectUrl selectedUrl = urlRepo.findById(url.getId()).orElseThrow();
-    selectedUrl = url;
-    return selectedUrl;
+    ProjectUrl oldUrl = urlRepo.findById(url.getId()).orElseThrow();
+    if (url.getUrl() != null || !url.getUrl().isBlank()) {
+      oldUrl.setUrl(url.getUrl());
+    }
+    if (url.getProjectId() != null) {
+      Projects foundProject = projectRepo.findById(url.getProjectId()).orElseThrow();
+      oldUrl.setProject(foundProject);
+    }
+    return urlRepo.save(oldUrl);
   }
 
   @Override
   public List<ProjectUrl> deleteUrl(UUID id) {
-    ProjectUrl selectedUrl = urlRepo.findById(id).orElseThrow();
-    urlRepo.deleteById(id);
-    Projects project = projectRepo.findById(selectedUrl.getProjectId()).orElseThrow();
-    return project.getUrls();
+    ProjectUrl foundUrl = urlRepo.findById(id).orElseThrow();
+    Projects urlProject = foundUrl.getProject();
+    urlRepo.delete(foundUrl);
+    return urlProject.getUrls();
   }
 }

@@ -27,32 +27,31 @@ public class UserService implements IUserService {
   @Override
   public Users updateUser(Users user) {
     UUID id = user.getId();
-    Users selectedUsers = userRepo.findById(id).orElseThrow();
+    Users foundUsers = userRepo.findById(id).orElseThrow();
     if (!user.getFirstName().isBlank()) {
-      selectedUsers.setFirstName(user.getFirstName());
+      foundUsers.setFirstName(user.getFirstName());
     }
     if (!user.getLastName().isBlank()) {
-      selectedUsers.setLastName(user.getLastName());
+      foundUsers.setLastName(user.getLastName());
     }
     if (!user.getEmail().isBlank()) {
-      selectedUsers.setEmail(user.getEmail());
+      foundUsers.setEmail(user.getEmail());
     }
     if (!user.getGithubUrl().isBlank()) {
-      selectedUsers.setGithubUrl(user.getGithubUrl());
+      foundUsers.setGithubUrl(user.getGithubUrl());
     }
     if (!user.getLinkedInUrl().isBlank()) {
-      selectedUsers.setLinkedInUrl(user.getLinkedInUrl());
+      foundUsers.setLinkedInUrl(user.getLinkedInUrl());
     }
     if (!user.getAboutMe().isBlank()) {
-      selectedUsers.setAboutMe(user.getAboutMe());
+      foundUsers.setAboutMe(user.getAboutMe());
     }
-    return userRepo.save(selectedUsers);
+    return userRepo.save(foundUsers);
   }
 
   @Override
   public String deleteUser(UUID id) {
-    userRepo.findById(id).orElseThrow();
-    userRepo.deleteById(id);
+    userRepo.delete(userRepo.findById(id).orElseThrow());
     return "User deleted successfully";
   }
 }

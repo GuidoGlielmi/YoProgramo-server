@@ -29,27 +29,25 @@ public class EducationService implements IEducationService {
   @Override
   public Education updateEducation(Education education) {
     UUID id = education.getId();
-    Education selectedEducation = educationRepo.findById(id).orElseThrow();
+    Education foundEducation = educationRepo.findById(id).orElseThrow();
     if (!education.getSchool().isBlank()) {
-      selectedEducation.setSchool(education.getSchool());
+      foundEducation.setSchool(education.getSchool());
     }
     if (!education.getStartDate().isBlank()) {
-      selectedEducation.setStartDate(education.getStartDate());
+      foundEducation.setStartDate(education.getStartDate());
     }
     if (!education.getEndDate().isBlank()) {
-      selectedEducation.setEndDate(education.getEndDate());
+      foundEducation.setEndDate(education.getEndDate());
     }
     if (!education.getDegree().isBlank()) {
-      selectedEducation.setDegree(education.getDegree());
+      foundEducation.setDegree(education.getDegree());
     }
-    educationRepo.save(selectedEducation);
-    return selectedEducation;
+    return educationRepo.save(foundEducation);
   }
 
   @Override
   public String deleteEducation(UUID id) {
-    educationRepo.findById(id).orElseThrow();
-    educationRepo.deleteById(id);
+    educationRepo.delete(educationRepo.findById(id).orElseThrow());
     return "Education item deleted successfully";
   }
 

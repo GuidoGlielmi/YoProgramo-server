@@ -28,28 +28,26 @@ public class ExperienceService implements IExperiencesService {
   @Override
   public Experiences updateExperience(Experiences experience) {
     UUID id = experience.getId();
-    Experiences selectedExperience = expRepo.findById(id).orElseThrow();
+    Experiences foundExperience = expRepo.findById(id).orElseThrow();
     if (!experience.getTitle().isBlank()) {
-      selectedExperience.setTitle(experience.getTitle());
+      foundExperience.setTitle(experience.getTitle());
     }
     if (!experience.getStartDate().isBlank()) {
-      selectedExperience.setStartDate(experience.getStartDate());
+      foundExperience.setStartDate(experience.getStartDate());
     }
     if (!experience.getEndDate().isBlank()) {
-      selectedExperience.setEndDate(experience.getEndDate());
+      foundExperience.setEndDate(experience.getEndDate());
     }
     if (!experience.getDescription().isBlank()) {
-      selectedExperience.setDescription(experience.getDescription());
+      foundExperience.setDescription(experience.getDescription());
     }
-    expRepo.save(selectedExperience);
-    return selectedExperience;
+    return expRepo.save(foundExperience);
 
   }
 
   @Override
   public String deleteExperience(UUID id) {
-    expRepo.findById(id).orElseThrow();
-    expRepo.deleteById(id);
+    expRepo.delete(expRepo.findById(id).orElseThrow());
     return "Experience item deleted successfully";
   }
 

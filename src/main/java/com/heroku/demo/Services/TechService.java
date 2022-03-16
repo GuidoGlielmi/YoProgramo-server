@@ -33,14 +33,14 @@ public class TechService implements ITechService {
   @Override
   public Technologies updateTech(Technologies tech) {
     UUID id = tech.getId();
-    Technologies selectedTechnologies = techRepo.findById(id).orElseThrow();
+    Technologies foundTechnologies = techRepo.findById(id).orElseThrow();
     if (!tech.getName().isBlank()) {
-      selectedTechnologies.setName(tech.getName());
+      foundTechnologies.setName(tech.getName());
     }
     if (tech.getProjects().size() != 0) {
-      selectedTechnologies.setProjects(tech.getProjects());
+      foundTechnologies.setProjects(tech.getProjects());
     }
-    return techRepo.save(selectedTechnologies);
+    return techRepo.save(foundTechnologies);
   }
 
   @Override
@@ -49,7 +49,7 @@ public class TechService implements ITechService {
     for (Projects projects : foundTech.getProjects()) {
       projects.getTechs().remove(foundTech);
     }
-    techRepo.deleteById(id);
+    techRepo.delete(foundTech);
     return "Technology item deleted successfully";
   }
 
