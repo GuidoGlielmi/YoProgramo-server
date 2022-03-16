@@ -37,12 +37,12 @@ public class ProjectService implements IProjectService {
       Technologies tech = techRepo.findById(techId).orElseThrow();
       newProject.addTech(tech);
     }
-    Projects persistedProject = projectRepo.save(newProject);
+    projectRepo.save(newProject); // With this, the urls are persisted AND, as such, saved in newProject
     for (ProjectUrl newUrl : newProject.getUrls()) {
-      newUrl.setProject(persistedProject);
-      urlRepo.save(newUrl);
+      newUrl.setProject(newProject);// newUrl already has an id
+      urlRepo.save(newUrl); // with cascade, the urls are only created, not linked to the project
     }
-    return persistedProject;// with "cascadeType=ALL" the urls are saved automatically
+    return newProject;// with "cascadeType=ALL" the urls are saved automatically
   }
 
   @Override

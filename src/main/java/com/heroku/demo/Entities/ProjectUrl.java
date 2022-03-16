@@ -24,14 +24,6 @@ public class ProjectUrl {
   @Transient
   private UUID projectId;
 
-  /* public ProjectUrl() {
-  }
-  
-  public ProjectUrl(String url, UUID projectId) {
-    this.url = url;
-    this.projectId = projectId;
-  } */
-
   // Every function starting with "get" gets included when calling findAll()
   public UUID getId() {
     return this.id;

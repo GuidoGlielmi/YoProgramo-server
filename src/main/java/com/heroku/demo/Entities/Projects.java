@@ -18,7 +18,8 @@ public class Projects {
   @ManyToMany
   // Project IS the owner, so when deleting the project, it will automatically be removed from every single tech's project list
   private List<Technologies> techs = new ArrayList<Technologies>();
-  @OneToMany(mappedBy = "project", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY) // cascade removes the urls when removing the related project. With lazy initialization approach, it will get initialized only when explicitly calling it, using a getter or some other method.
+  @OneToMany(mappedBy = "project", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY) // cascade makes any change made in the parent, applied to the child.
+  // With lazy initialization approach, it will get initialized only when explicitly calling it, using a getter or some other method.
   private List<ProjectUrl> urls = new ArrayList<ProjectUrl>();
 
   /* @JoinColumn creates a column in the many side of the relation with the given name that references the PK of the parent entity, unless referencedColumnName is specified */
