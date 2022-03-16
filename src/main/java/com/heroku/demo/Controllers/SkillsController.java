@@ -22,18 +22,18 @@ public class SkillsController {
   }
 
   @PostMapping
-  public void addSkill(@RequestBody Skills skill) {
-    skillsService.addSkill(skill);
+  public Skills addSkill(@RequestBody Skills skill) {
+    return skillsService.addSkill(skill);
   }
 
   @PutMapping
-  public void updateSkill(@RequestBody Skills skill) {
-    skillsService.updateSkill(skill);
+  public Skills updateSkill(@RequestBody Skills skill) {
+    return skillsService.updateSkill(skill);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteSkill(@PathVariable UUID id) {
-    skillsService.deleteSkill(id);
+  public String deleteSkill(@PathVariable UUID id) {
+    return skillsService.deleteSkill(id);
   }
 
 }

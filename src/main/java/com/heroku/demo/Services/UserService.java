@@ -1,5 +1,6 @@
 package com.heroku.demo.Services;
 
+import java.util.List;
 import java.util.UUID;
 import com.heroku.demo.Entities.Users;
 import com.heroku.demo.Repositories.UserRepo;
@@ -14,18 +15,13 @@ public class UserService implements IUserService {
   UserRepo userRepo;
 
   @Override
-  public Users getUsers() {
-    return userRepo.findAll().get(0);
+  public List<Users> getUsers() {
+    return userRepo.findAll();
   }
 
   @Override
-  public String addUser(Users user) {
-    try {
-      userRepo.save(user);
-      return "User added successfully";
-    } catch (Exception e) {
-      return e.getMessage();
-    }
+  public Users addUser(Users user) {
+    return userRepo.save(user);
   }
 
   @Override
@@ -50,8 +46,7 @@ public class UserService implements IUserService {
     if (!user.getAboutMe().isBlank()) {
       selectedUsers.setAboutMe(user.getAboutMe());
     }
-    userRepo.save(selectedUsers);
-    return selectedUsers;
+    return userRepo.save(selectedUsers);
   }
 
   @Override

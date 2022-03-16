@@ -21,19 +21,13 @@ public class SkillService implements ISkillService {
   }
 
   @Override
-  public String addSkill(Skills skill) {
-    try {
-      skillRepo.save(skill);
-      return "Skill item deleted successfully";
-
-    } catch (Exception e) {
-      return e.getMessage();
-    }
+  public Skills addSkill(Skills skill) {
+    return skillRepo.save(skill);
   }
 
   @Override
   public Skills updateSkill(Skills skill) {
-    UUID id = skill.getSkill_id();
+    UUID id = skill.getId();
     Skills selectedSkill = skillRepo.findById(id).orElseThrow();
     if (!skill.getName().isBlank()) {
       selectedSkill.setName(skill.getName());

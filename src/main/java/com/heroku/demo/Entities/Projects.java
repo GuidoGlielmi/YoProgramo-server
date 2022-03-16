@@ -9,25 +9,23 @@ import javax.persistence.*;
 @Entity
 public class Projects {
   @Id
-  @SequenceGenerator(name = "projects_id_seq", sequenceName = "projects_id_seq", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  //@SequenceGenerator(name = "projects_id_seq", sequenceName = "projects_id_seq", allocationSize = 1)
+  @GeneratedValue //AUTO by default
   private UUID id;
   private String title;
   private String description;
   @ManyToMany
-  /* @Jointable(
-    name = "project_technologies", 
-    joinColumns = @JoinColumn(name = "project_id"), 
-    inverseJoinColumns = @JoinColumn(name = "technology_id")) */
+  // Project IS the owner, so when deleting the project, it will automatically be removed from every single tech's project list
   private List<Technologies> technologies = new ArrayList<Technologies>();
-  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL) // cascade removes the urls when removing the related project
+  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // cascade removes the urls when removing the related project. With lazy initialization approach, it will get initialized only when explicitly calling it, using a getter or some other method.
   private List<ProjectUrl> urls = new ArrayList<ProjectUrl>();
 
-  public UUID getid() {
+  /* @JoinColumn creates a column in the many side of the relation with the given name that references the PK of the parent entity, unless referencedColumnName is specified */
+  public UUID getId() {
     return this.id;
   }
 
-  public void setid(UUID id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 

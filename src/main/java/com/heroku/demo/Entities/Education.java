@@ -7,21 +7,20 @@ import javax.persistence.*;
 @Entity
 public class Education {
   @Id
-  @SequenceGenerator(name = "education_id_seq", sequenceName = "education_id_seq", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private UUID education_id;
+  @GeneratedValue
+  private UUID id;
 
   private String school = "";
   private String startDate = "";
   private String endDate = "";
   private String degree = "";
 
-  public UUID getEducation_id() {
-    return this.education_id;
+  public UUID getId() {
+    return this.id;
   }
 
-  public void setEducation_id(UUID education_id) {
-    this.education_id = education_id;
+  public void setId(UUID id) {
+    this.id = id;
   }
 
   public String getSchool() {

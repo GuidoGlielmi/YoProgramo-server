@@ -1,5 +1,6 @@
 package com.heroku.demo.Controllers;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.heroku.demo.Entities.Users;
@@ -15,22 +16,22 @@ public class UserController {
   private IUserService userService;
 
   @GetMapping
-  public Users getUsers() {
+  public List<Users> getUsers() {
     return userService.getUsers();
   }
 
   @PostMapping
-  public String addUser(Users user) {
+  public Users addUser(@RequestBody Users user) {
     return userService.addUser(user);
   }
 
   @PutMapping
-  public void updateUser(@RequestBody Users user) {
-    userService.updateUser(user);
+  public Users updateUser(@RequestBody Users user) {
+    return userService.updateUser(user);
   }
 
-  @DeleteMapping
-  public void addUser(@PathVariable UUID id) {
-    userService.deleteUser(id);
+  @DeleteMapping("/{id}")
+  public String addUser(@PathVariable UUID id) {
+    return userService.deleteUser(id);
   }
 }

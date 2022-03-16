@@ -22,17 +22,17 @@ public class ExperienceController {
   }
 
   @PostMapping
-  public String addExperience(@RequestBody Experiences experience) {
+  public Experiences addExperience(@RequestBody Experiences experience) {
     return experienceService.addExperience(experience);
   }
 
   @PutMapping
-  public void updateExperience(@RequestBody Experiences experience) {
-    experienceService.updateExperience(experience);
+  public Experiences updateExperience(@RequestBody Experiences experience) {
+    return experienceService.updateExperience(experience);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteExperience(@PathVariable UUID id) {
-    experienceService.deleteExperience(id);
+  public String deleteExperience(@PathVariable UUID id) {
+    return experienceService.deleteExperience(id);
   }
 }

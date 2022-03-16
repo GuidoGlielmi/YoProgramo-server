@@ -8,7 +8,7 @@ import com.heroku.demo.Entities.Education;
 public interface IEducationService {
   public List<Education> getEducation();
 
-  public String addEducation(Education education);
+  public Education addEducation(Education education);
 
   public Education updateEducation(Education education);
 

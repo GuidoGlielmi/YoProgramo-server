@@ -21,18 +21,13 @@ public class ExperienceService implements IExperiencesService {
   }
 
   @Override
-  public String addExperience(Experiences experience) {
-    try {
-      expRepo.save(experience);
-      return "Experience item added successfully";
-    } catch (Exception e) {
-      return e.getMessage();
-    }
+  public Experiences addExperience(Experiences experience) {
+    return expRepo.save(experience);
   }
 
   @Override
   public Experiences updateExperience(Experiences experience) {
-    UUID id = experience.getExperience_id();
+    UUID id = experience.getId();
     Experiences selectedExperience = expRepo.findById(id).orElseThrow();
     if (!experience.getTitle().isBlank()) {
       selectedExperience.setTitle(experience.getTitle());

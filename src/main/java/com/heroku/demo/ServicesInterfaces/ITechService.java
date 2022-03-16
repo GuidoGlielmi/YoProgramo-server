@@ -8,7 +8,7 @@ import com.heroku.demo.Entities.Technologies;
 public interface ITechService {
   public List<Technologies> getTechs();
 
-  public String addTech(Technologies tech);
+  public Technologies addTech(Technologies tech);
 
   public Technologies updateTech(Technologies tech);
 

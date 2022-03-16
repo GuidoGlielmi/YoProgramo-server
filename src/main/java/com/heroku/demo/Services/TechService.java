@@ -3,7 +3,9 @@ package com.heroku.demo.Services;
 import java.util.UUID;
 import java.util.List;
 
+import com.heroku.demo.Entities.Projects;
 import com.heroku.demo.Entities.Technologies;
+import com.heroku.demo.Repositories.ProjectRepo;
 import com.heroku.demo.Repositories.TechRepo;
 import com.heroku.demo.ServicesInterfaces.ITechService;
 
@@ -15,20 +17,17 @@ public class TechService implements ITechService {
 
   @Autowired
   TechRepo techRepo;
+  @Autowired
+  ProjectRepo projectRepo;
 
   @Override
   public List<Technologies> getTechs() {
-    return techRepo.findAll();
+    return techRepo.findAllByOrderByNameAsc();
   }
 
   @Override
-  public String addTech(Technologies tech) {
-    try {
-      techRepo.save(tech);
-      return "Technology item added successfully";
-    } catch (Exception e) {
-      return e.getMessage();
-    }
+  public Technologies addTech(Technologies tech) {
+    return techRepo.save(tech);
   }
 
   @Override
@@ -41,16 +40,17 @@ public class TechService implements ITechService {
     if (tech.getProjects().size() != 0) {
       selectedTechnologies.setProjects(tech.getProjects());
     }
-    techRepo.save(selectedTechnologies);
-    return selectedTechnologies;
+    return techRepo.save(selectedTechnologies);
   }
 
   @Override
   public String deleteTech(UUID id) {
-    techRepo.findById(id).orElseThrow();
+    Technologies foundTech = techRepo.findById(id).orElseThrow();
+    for (Projects projects : foundTech.getProjects()) {
+      projects.getTechs().remove(foundTech);
+    }
     techRepo.deleteById(id);
     return "Technology item deleted successfully";
-
   }
 
 }

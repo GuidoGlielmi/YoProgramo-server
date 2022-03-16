@@ -6,24 +6,20 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
 @Entity
 public class ProjectUrl {
   @Id
-  //@SequenceGenerator(name = "project_urls_id_seq", sequenceName = "project_urls_id_seq", allocationSize = 1)
-  // @GeneratedValue(strategy = GenerationType.AUTO)
-  @GeneratedValue(generator = "UUID")
-  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  @GeneratedValue
   private UUID id;
   @NonNull
   private String url;
+  @ManyToOne(fetch = FetchType.LAZY) // with just @ManyToOne the corresponding table is created but urls are not included in the projects themselves
   @JsonIgnore
-  @ManyToOne // with just @ManyToOne the corresponding table is created but urls are not included in the projects themselves
-  // @JoinColumn(name = "project_id", referencedColumnName = "id")
   private Projects project;
 
+  // Every function starting with "get" gets included when calling findAll()
   public UUID getId() {
     return this.id;
   }
@@ -46,6 +42,10 @@ public class ProjectUrl {
 
   public void setProject(Projects project) {
     this.project = project;
+  }
+
+  public UUID getProjectId() {
+    return project.getId();
   }
 
 }

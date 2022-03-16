@@ -22,19 +22,13 @@ public class EducationService implements IEducationService {
   }
 
   @Override
-  public String addEducation(Education education) {
-    try {
-      educationRepo.save(education);
-      return "Education item added successfully";
-    } catch (Exception e) {
-      return e.getMessage();
-    }
-
+  public Education addEducation(Education education) {
+    return educationRepo.save(education);
   }
 
   @Override
   public Education updateEducation(Education education) {
-    UUID id = education.getEducation_id();
+    UUID id = education.getId();
     Education selectedEducation = educationRepo.findById(id).orElseThrow();
     if (!education.getSchool().isBlank()) {
       selectedEducation.setSchool(education.getSchool());

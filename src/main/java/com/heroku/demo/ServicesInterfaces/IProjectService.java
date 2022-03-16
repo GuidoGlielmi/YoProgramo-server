@@ -1,6 +1,7 @@
 package com.heroku.demo.ServicesInterfaces;
 
 import com.heroku.demo.Entities.Projects;
+import com.heroku.demo.Entities.Technologies;
 import com.heroku.demo.Entities.ProjectUrl;
 
 import java.util.List;
@@ -12,21 +13,21 @@ public interface IProjectService {
 
   public List<Projects> getProjects();
 
-  public String addProject(ProjectDto project);
+  public UUID addProject(ProjectDto project);
 
   public Projects updateProject(ProjectDto project);
 
   public String deleteProject(UUID projectId);
 
-  public String addTechToProject(UUID projectId, UUID techId);
+  public List<Technologies> addTechToProject(UUID projectId, UUID techId);
 
-  public String removeTechFromProject(UUID id, UUID techId);
+  public List<Technologies> removeTechFromProject(UUID id, UUID techId);
 
   public List<ProjectUrl> getUrls();
 
-  public String addUrl(ProjectUrl url);
+  public ProjectUrl addUrl(UUID projectId, ProjectUrl url);
 
-  public String deleteUrl(UUID id);
+  public List<ProjectUrl> deleteUrl(UUID id);
 
   public ProjectUrl updateUrl(ProjectUrl url);
 

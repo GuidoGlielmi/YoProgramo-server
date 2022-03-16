@@ -8,12 +8,13 @@ import com.heroku.demo.Entities.*;
 public class ProjectDto {
   private Projects project;
   private List<ProjectUrl> urls;
+
   private List<UUID> techs;
 
-  public ProjectDto(Projects project, List<UUID> techs, List<ProjectUrl> urls) {
+  public ProjectDto(Projects project, List<ProjectUrl> urls, List<UUID> techs) {
     this.project = project;
-    this.techs = techs;
     this.urls = urls;
+    this.techs = techs;
   }
 
   public Projects getProject() {

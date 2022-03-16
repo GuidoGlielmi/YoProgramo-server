@@ -21,18 +21,18 @@ public class TechController {
   }
 
   @PostMapping
-  public void addTech(@RequestBody Technologies tech) {
-    techService.addTech(tech);
+  public Technologies addTech(@RequestBody Technologies tech) {
+    return techService.addTech(tech);
   }
 
   @PutMapping
-  public void updateTech(@RequestBody Technologies tech) {
-    techService.updateTech(tech);
+  public Technologies updateTech(@RequestBody Technologies tech) {
+    return techService.updateTech(tech);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteTech(@PathVariable UUID id) {
-    techService.deleteTech(id);
+  public String deleteTech(@PathVariable UUID id) {
+    return techService.deleteTech(id);
   }
 
 }

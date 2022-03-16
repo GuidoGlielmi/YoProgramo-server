@@ -7,8 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Users {
   @Id
-  @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue
   private UUID id;
   private String firstName = "";
   private String lastName = "";
@@ -16,17 +15,6 @@ public class Users {
   private String linkedInUrl = "";
   private String githubUrl = "";
   private String aboutMe = "";
-
-  public Users(UUID id, String firstName, String lastName, String email, String linkedInUrl, String githubUrl,
-      String aboutMe) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.linkedInUrl = linkedInUrl;
-    this.githubUrl = githubUrl;
-    this.aboutMe = aboutMe;
-  }
 
   public UUID getId() {
     return this.id;

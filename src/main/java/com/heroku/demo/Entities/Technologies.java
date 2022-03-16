@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Technologies {
   @Id
-  @SequenceGenerator(name = "technologies_id_seq", sequenceName = "technologies_id_seq", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue
   private UUID id;
   private String name = "";
   @JsonIgnore // This avoids recursion
-  @ManyToMany(mappedBy = "technologies")
+  @ManyToMany(mappedBy = "technologies") //the mapped entity is NOT the owner,
+  //so, when deleting, it's necessary to delete it from all the users and from the techs itself
   private List<Projects> projects = new ArrayList<Projects>();
 
   public UUID getId() {

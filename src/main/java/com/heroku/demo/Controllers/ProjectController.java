@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.heroku.demo.DTO.ProjectDto;
 import com.heroku.demo.Entities.ProjectUrl;
 import com.heroku.demo.Entities.Projects;
+import com.heroku.demo.Entities.Technologies;
 import com.heroku.demo.ServicesInterfaces.IProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ProjectController {
   }
 
   @PostMapping
-  public String addProject(@RequestBody ProjectDto project) {
+  public Object addProject(@RequestBody ProjectDto project) {
     return projectService.addProject(project);
   }
 
@@ -33,12 +34,22 @@ public class ProjectController {
   }
 
   @PostMapping("/{projectId}/tech/{techId}")
-  public String addProjectTech(@PathVariable UUID projectId, @PathVariable UUID techId) {
+  public List<Technologies> addTechToProject(@PathVariable UUID projectId, @PathVariable UUID techId) {
     return projectService.addTechToProject(projectId, techId);
+  }
+
+  @DeleteMapping("/{projectId}/tech/{techId}")
+  public List<Technologies> removeTechFromProject(@PathVariable UUID projectId, @PathVariable UUID techId) {
+    return projectService.removeTechFromProject(projectId, techId);
   }
 
   @GetMapping("/url")
   public List<ProjectUrl> getUrls() {
+    for (ProjectUrl p : projectService.getUrls()) {
+      System.out.println(p.getUrl());
+      System.out.println(p.getId());
+      System.out.println(p.getProject().getId());
+    }
     return projectService.getUrls();
   }
 
@@ -47,14 +58,14 @@ public class ProjectController {
     return projectService.updateUrl(url);
   }
 
-  @DeleteMapping("/url/{id}")
-  public String deleteUrl(@PathVariable UUID id) {
-    return projectService.deleteUrl(id);
+  @PostMapping("/url")
+  public ProjectUrl addUrl(@RequestParam UUID projectId, @RequestBody ProjectUrl url) {
+    return projectService.addUrl(projectId, url);
   }
 
-  @PostMapping("/url")
-  public void addUrl(@RequestBody ProjectUrl url) {
-    projectService.addUrl(url);
+  @DeleteMapping("/url/{id}")
+  public List<ProjectUrl> deleteUrl(@PathVariable UUID id) {
+    return projectService.deleteUrl(id);
   }
 
   // return new ResponseEntity<>(projectService.addProjectTech(techId, projectId), HttpStatus.CREATED)

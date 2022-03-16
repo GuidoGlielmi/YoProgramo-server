@@ -6,20 +6,19 @@ import javax.persistence.*;
 @Entity
 public class Skills {
   @Id
-  @SequenceGenerator(name = "skills_id_seq", sequenceName = "skills_id_seq", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private UUID skill_id;
+  @GeneratedValue
+  private UUID id;
 
   private String name = "";
   private int abilityPercentage = 0;
   private String type = "";
 
-  public UUID getSkill_id() {
-    return this.skill_id;
+  public UUID getId() {
+    return this.id;
   }
 
-  public void setSkill_id(UUID skill_id) {
-    this.skill_id = skill_id;
+  public void setId(UUID id) {
+    this.id = id;
   }
 
   public String getName() {
