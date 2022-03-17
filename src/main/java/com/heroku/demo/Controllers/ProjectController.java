@@ -55,7 +55,7 @@ public class ProjectController {
   }
 
   @PostMapping("/url")
-  public ProjectUrl addUrl(@RequestBody ProjectUrl url) {
+  public List<ProjectUrl> addUrl(@RequestBody ProjectUrl url) {
     return projectService.addUrl(url);
   }
 

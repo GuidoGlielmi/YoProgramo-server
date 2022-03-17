@@ -67,4 +67,8 @@ public class Projects {
   public void setUrls(List<ProjectUrl> urls) {
     this.urls = urls;
   }
+
+  public void addUrl(ProjectUrl url) {
+    this.urls.add(url);
+  }
 }

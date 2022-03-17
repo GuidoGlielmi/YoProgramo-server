@@ -22,7 +22,7 @@ public class SkillsController {
   }
 
   @PostMapping
-  public Skills addSkill(@RequestBody Skills skill) {
+  public List<Skills> addSkill(@RequestBody Skills skill) {
     return skillsService.addSkill(skill);
   }
 

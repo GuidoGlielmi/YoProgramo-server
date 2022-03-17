@@ -22,7 +22,7 @@ public class ExperienceController {
   }
 
   @PostMapping
-  public Experiences addExperience(@RequestBody Experiences experience) {
+  public List<Experiences> addExperience(@RequestBody Experiences experience) {
     return experienceService.addExperience(experience);
   }
 

@@ -26,6 +26,10 @@ public class ProjectService implements IProjectService {
   @Autowired
   ProjectUrlRepo urlRepo;
 
+  ///////////////////////////////
+  // PROJECTS
+  //////////////////////////////
+
   @Override
   public List<Projects> getProjects() {
     return projectRepo.findAll();
@@ -92,7 +96,8 @@ public class ProjectService implements IProjectService {
   }
 
   ///////////////////////////////
-
+  // TECHNOLOGIES
+  //////////////////////////////
   @Override
   public List<Technologies> addTechToProject(UUID projectId, UUID techId) {
     Projects foundProject = projectRepo.findById(projectId).orElseThrow();
@@ -106,10 +111,11 @@ public class ProjectService implements IProjectService {
     Projects persistedProject = projectRepo.findById(projectId).orElseThrow();
     Technologies persistedTech = techRepo.findById(techId).orElseThrow();
     persistedProject.getTechs().remove(persistedTech);
-    projectRepo.save(persistedProject);
-    return persistedProject.getTechs();
+    return projectRepo.save(persistedProject).getTechs();
   }
 
+  ///////////////////////////////
+  // URLS
   ///////////////////////////////
 
   @Override
@@ -118,10 +124,11 @@ public class ProjectService implements IProjectService {
   }
 
   @Override
-  public ProjectUrl addUrl(ProjectUrl newUrl) {
+  public List<ProjectUrl> addUrl(ProjectUrl newUrl) {
     Projects foundProject = projectRepo.findById(newUrl.getProjectId()).orElseThrow();
-    newUrl.setProject(foundProject); //this automatically adds the url to the project's list
-    return urlRepo.save(newUrl);
+    newUrl.setProject(foundProject); //this automatically (without persisting it) adds the url to the project's list
+    urlRepo.save(newUrl);
+    return foundProject.getUrls();
   }
 
   @Override

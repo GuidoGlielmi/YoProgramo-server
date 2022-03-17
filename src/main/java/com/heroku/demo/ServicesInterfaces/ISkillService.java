@@ -8,7 +8,7 @@ import com.heroku.demo.Entities.Skills;
 public interface ISkillService {
   public List<Skills> getSkills();
 
-  public Skills addSkill(Skills skill);
+  public List<Skills> addSkill(Skills skill);
 
   public Skills updateSkill(Skills skill);
 

@@ -22,8 +22,9 @@ public class EducationService implements IEducationService {
   }
 
   @Override
-  public Education addEducation(Education education) {
-    return educationRepo.save(education);
+  public List<Education> addEducation(Education education) {
+    educationRepo.save(education);
+    return educationRepo.findAll();
   }
 
   @Override

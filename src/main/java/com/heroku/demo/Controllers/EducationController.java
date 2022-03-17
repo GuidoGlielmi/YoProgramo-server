@@ -22,7 +22,7 @@ public class EducationController {
   }
 
   @PostMapping
-  public Education addEducation(@RequestBody Education education) {
+  public List<Education> addEducation(@RequestBody Education education) {
     return educationService.addEducation(education);
   }
 

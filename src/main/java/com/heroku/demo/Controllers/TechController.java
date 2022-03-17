@@ -21,7 +21,7 @@ public class TechController {
   }
 
   @PostMapping
-  public Technologies addTech(@RequestBody Technologies tech) {
+  public List<Technologies> addTech(@RequestBody Technologies tech) {
     return techService.addTech(tech);
   }
 

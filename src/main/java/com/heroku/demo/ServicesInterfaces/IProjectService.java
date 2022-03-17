@@ -25,7 +25,7 @@ public interface IProjectService {
 
   public List<ProjectUrl> getUrls();
 
-  public ProjectUrl addUrl(ProjectUrl url);
+  public List<ProjectUrl> addUrl(ProjectUrl url);
 
   public List<ProjectUrl> deleteUrl(UUID id);
 

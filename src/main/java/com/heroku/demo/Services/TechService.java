@@ -26,8 +26,9 @@ public class TechService implements ITechService {
   }
 
   @Override
-  public Technologies addTech(Technologies tech) {
-    return techRepo.save(tech);
+  public List<Technologies> addTech(Technologies tech) {
+    techRepo.save(tech);
+    return techRepo.findAll();
   }
 
   @Override

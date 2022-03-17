@@ -21,8 +21,9 @@ public class SkillService implements ISkillService {
   }
 
   @Override
-  public Skills addSkill(Skills skill) {
-    return skillRepo.save(skill);
+  public List<Skills> addSkill(Skills skill) {
+    skillRepo.save(skill);
+    return skillRepo.findAll();
   }
 
   @Override
