@@ -10,6 +10,7 @@ import com.heroku.demo.ServicesInterfaces.IEducationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("education")
 public class EducationController {
