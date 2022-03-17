@@ -1,5 +1,6 @@
 package com.heroku.demo.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,33 +33,62 @@ public class ProjectService implements IProjectService {
 
   @Override
   public Projects addProject(ProjectDto projectDto) {
+    /* Since Technologies is ignoring the project property, it's necessary to use a DTO,
+    because there is an inconsistency between a project that holds a tech and the same tech not holding said project */
     Projects newProject = projectDto.getProject();
     for (UUID techId : projectDto.getTechsIds()) {
       Technologies tech = techRepo.findById(techId).orElseThrow();
       newProject.addTech(tech);
     }
-    projectRepo.save(newProject); // With this, the urls are persisted AND, as such, saved in newProject
+    projectRepo.save(newProject); // CascadeType.PERSIST is not useful since it doesn't link the url to the project, so accessing urlRepo would be necessary anyways.
     for (ProjectUrl newUrl : newProject.getUrls()) {
-      newUrl.setProject(newProject);// newUrl already has an id
-      urlRepo.save(newUrl); // with cascade, the urls are only created, not linked to the project
+      newUrl.setProject(newProject);
+      urlRepo.save(newUrl);
     }
-    return newProject;// with "cascadeType=ALL" the urls are saved automatically
+    return newProject;
   }
 
   @Override
   public Projects updateProject(ProjectDto projectDto) {
     Projects foundProject = projectRepo.findById(projectDto.getProject().getId()).orElseThrow();
     Projects updatedProject = projectDto.getProject();
-    foundProject.setTechs(updatedProject.getTechs());
-    foundProject.setUrls(updatedProject.getUrls());
-    return projectRepo.save(foundProject);
+
+    if (projectDto.getTechsIds() != null) {
+      List<Technologies> newTechs = new ArrayList<>();
+      for (UUID techId : projectDto.getTechsIds()) {
+        Technologies tech = techRepo.findById(techId).orElseThrow();
+        newTechs.add(tech);
+      }
+      foundProject.setTechs(newTechs);
+    }
+
+    if (updatedProject.getUrls() != null) {
+      // project is not the owner, so it's necessary to delete via urlRepo
+      for (ProjectUrl url : foundProject.getUrls()) {
+        urlRepo.deleteById(url.getId());
+      }
+      for (ProjectUrl url : updatedProject.getUrls()) {
+        urlRepo.save(url);
+      }
+      foundProject.setUrls(updatedProject.getUrls());
+    }
+    if (!updatedProject.getTitle().isBlank()) {
+      foundProject.setTitle(updatedProject.getTitle());
+    }
+    if (!updatedProject.getTitle().isBlank()) {
+      foundProject.setTitle(updatedProject.getTitle());
+    }
+    if (!updatedProject.getDescription().isBlank()) {
+      foundProject.setDescription(updatedProject.getDescription());
+    }
+    return foundProject;
   }
 
   @Override
-  public String deleteProject(UUID projectId) {
+  public List<Projects> deleteProject(UUID projectId) {
     projectRepo.findById(projectId).orElseThrow();
-    projectRepo.deleteById(projectId);
-    return "Project deleted successfully";
+    projectRepo.deleteById(projectId);// without CascadeType.REMOVE it's not possible to delete the project, since it's the child in the relation.
+    return projectRepo.findAll();
   }
 
   ///////////////////////////////
@@ -68,23 +98,16 @@ public class ProjectService implements IProjectService {
     Projects foundProject = projectRepo.findById(projectId).orElseThrow();
     Technologies foundTech = techRepo.findById(techId).orElseThrow();
     foundProject.addTech(foundTech);
-    foundTech.addProject(foundProject);
-    projectRepo.save(foundProject);
-    techRepo.save(foundTech);
-    return foundProject.getTechs();
+    return projectRepo.save(foundProject).getTechs();
   }
 
   @Override
   public List<Technologies> removeTechFromProject(UUID projectId, UUID techId) {
     Projects persistedProject = projectRepo.findById(projectId).orElseThrow();
     Technologies persistedTech = techRepo.findById(techId).orElseThrow();
-    List<Projects> persistedTechProjects = persistedTech.getProjects();
-    List<Technologies> persistedProjectTechs = persistedProject.getTechs();
-    persistedProjectTechs.remove(persistedTech);
-    persistedTechProjects.remove(persistedProject);
+    persistedProject.getTechs().remove(persistedTech);
     projectRepo.save(persistedProject);
-    techRepo.save(persistedTech);
-    return persistedProjectTechs;
+    return persistedProject.getTechs();
   }
 
   ///////////////////////////////
@@ -97,7 +120,7 @@ public class ProjectService implements IProjectService {
   @Override
   public ProjectUrl addUrl(ProjectUrl newUrl) {
     Projects foundProject = projectRepo.findById(newUrl.getProjectId()).orElseThrow();
-    newUrl.setProject(foundProject);
+    newUrl.setProject(foundProject); //this automatically adds the url to the project's list
     return urlRepo.save(newUrl);
   }
 
@@ -109,7 +132,7 @@ public class ProjectService implements IProjectService {
     }
     if (url.getProjectId() != null) {
       Projects foundProject = projectRepo.findById(url.getProjectId()).orElseThrow();
-      oldUrl.setProject(foundProject);
+      oldUrl.setProject(foundProject); //this automatically updates the url the the project's list
     }
     return urlRepo.save(oldUrl);
   }

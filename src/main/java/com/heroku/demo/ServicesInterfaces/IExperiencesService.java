@@ -12,6 +12,6 @@ public interface IExperiencesService {
 
   public Experiences updateExperience(Experiences experience);
 
-  public String deleteExperience(UUID id);
+  public List<Experiences> deleteExperience(UUID id);
 
 }

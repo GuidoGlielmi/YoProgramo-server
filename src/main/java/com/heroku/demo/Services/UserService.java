@@ -50,8 +50,8 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public String deleteUser(UUID id) {
+  public List<Users> deleteUser(UUID id) {
     userRepo.delete(userRepo.findById(id).orElseThrow());
-    return "User deleted successfully";
+    return userRepo.findAll();
   }
 }

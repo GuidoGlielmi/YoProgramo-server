@@ -14,5 +14,5 @@ public interface IUserService {
 
   public Users updateUser(Users user);
 
-  public String deleteUser(UUID id);
+  public List<Users> deleteUser(UUID id);
 }

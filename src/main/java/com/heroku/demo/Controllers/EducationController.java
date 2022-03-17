@@ -32,7 +32,7 @@ public class EducationController {
   }
 
   @DeleteMapping("/{id}")
-  public String deleteEducation(@PathVariable UUID id) {
+  public List<Education> deleteEducation(@PathVariable UUID id) {
     return educationService.deleteEducation(id);
   }
 

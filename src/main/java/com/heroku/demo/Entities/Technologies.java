@@ -14,9 +14,10 @@ public class Technologies {
 	@GeneratedValue
 	private UUID id;
 	private String name = "";
-	@JsonIgnore // This avoids recursion, can't be transfered via http
+	@JsonIgnore // This avoids recursion, can't be transfered as JSON
 	@ManyToMany(mappedBy = "techs") //the mapped entity is NOT the owner,
-	//so, when deleting, it's necessary to delete it from all the users and from the techs itself
+	//so, when deleting, it's necessary to delete it from all the users and from the techs itself.
+	// I wouldn't make much sense to have CascadeType.REMOVE in a ManyToMany relationship, since it would delete every project that has the tech.
 	private List<Projects> projects = new ArrayList<Projects>();
 
 	public Technologies() {

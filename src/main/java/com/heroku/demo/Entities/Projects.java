@@ -18,7 +18,8 @@ public class Projects {
   @ManyToMany
   // Project IS the owner, so when deleting the project, it will automatically be removed from every single tech's project list
   private List<Technologies> techs = new ArrayList<Technologies>();
-  @OneToMany(mappedBy = "project", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY) // cascade makes any change made in the parent, applied to the child.
+  @OneToMany(mappedBy = "project", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
+  // mappedBy sets the parent entity. Cascade's PERSIST type creates the url when creating the project, but without linking the url to the project.
   // With lazy initialization approach, it will get initialized only when explicitly calling it, using a getter or some other method.
   private List<ProjectUrl> urls = new ArrayList<ProjectUrl>();
 

@@ -35,7 +35,7 @@ public class ProjectController {
   }
 
   @DeleteMapping("/{id}")
-  public String deleteProject(@PathVariable UUID id) {
+  public List<Projects> deleteProject(@PathVariable UUID id) {
     return projectService.deleteProject(id);
   }
 

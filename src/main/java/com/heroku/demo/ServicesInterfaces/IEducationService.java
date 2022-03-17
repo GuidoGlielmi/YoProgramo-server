@@ -12,5 +12,5 @@ public interface IEducationService {
 
   public Education updateEducation(Education education);
 
-  public String deleteEducation(UUID id);
+  public List<Education> deleteEducation(UUID id);
 }

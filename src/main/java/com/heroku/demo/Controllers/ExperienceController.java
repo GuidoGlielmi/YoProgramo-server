@@ -32,7 +32,7 @@ public class ExperienceController {
   }
 
   @DeleteMapping("/{id}")
-  public String deleteExperience(@PathVariable UUID id) {
+  public List<Experiences> deleteExperience(@PathVariable UUID id) {
     return experienceService.deleteExperience(id);
   }
 }

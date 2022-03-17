@@ -44,13 +44,13 @@ public class TechService implements ITechService {
   }
 
   @Override
-  public String deleteTech(UUID id) {
+  public List<Technologies> deleteTech(UUID id) {
     Technologies foundTech = techRepo.findById(id).orElseThrow();
     for (Projects projects : foundTech.getProjects()) {
       projects.getTechs().remove(foundTech);
     }
     techRepo.delete(foundTech);
-    return "Technology item deleted successfully";
+    return techRepo.findAll();
   }
 
 }

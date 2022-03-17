@@ -12,6 +12,6 @@ public interface ITechService {
 
   public Technologies updateTech(Technologies tech);
 
-  public String deleteTech(UUID id);
+  public List<Technologies> deleteTech(UUID id);
 
 }

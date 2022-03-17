@@ -31,7 +31,7 @@ public class TechController {
   }
 
   @DeleteMapping("/{id}")
-  public String deleteTech(@PathVariable UUID id) {
+  public List<Technologies> deleteTech(@PathVariable UUID id) {
     return techService.deleteTech(id);
   }
 

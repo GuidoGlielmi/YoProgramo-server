@@ -31,7 +31,7 @@ public class UserController {
   }
 
   @DeleteMapping("/{id}")
-  public String addUser(@PathVariable UUID id) {
+  public List<Users> addUser(@PathVariable UUID id) {
     return userService.deleteUser(id);
   }
 }

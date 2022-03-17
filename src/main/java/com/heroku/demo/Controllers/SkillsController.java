@@ -32,7 +32,7 @@ public class SkillsController {
   }
 
   @DeleteMapping("/{id}")
-  public String deleteSkill(@PathVariable UUID id) {
+  public List<Skills> deleteSkill(@PathVariable UUID id) {
     return skillsService.deleteSkill(id);
   }
 

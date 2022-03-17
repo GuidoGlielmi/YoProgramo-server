@@ -17,7 +17,7 @@ public interface IProjectService {
 
   public Projects updateProject(ProjectDto project);
 
-  public String deleteProject(UUID projectId);
+  public List<Projects> deleteProject(UUID projectId);
 
   public List<Technologies> addTechToProject(UUID projectId, UUID techId);
 

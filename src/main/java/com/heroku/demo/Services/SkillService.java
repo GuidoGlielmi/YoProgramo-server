@@ -42,9 +42,9 @@ public class SkillService implements ISkillService {
   }
 
   @Override
-  public String deleteSkill(UUID id) {
+  public List<Skills> deleteSkill(UUID id) {
     skillRepo.delete(skillRepo.findById(id).orElseThrow());
-    return "Skill item deleted successfully";
+    return skillRepo.findAll();
   }
 
 }

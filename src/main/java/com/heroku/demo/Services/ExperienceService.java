@@ -46,9 +46,9 @@ public class ExperienceService implements IExperiencesService {
   }
 
   @Override
-  public String deleteExperience(UUID id) {
+  public List<Experiences> deleteExperience(UUID id) {
     expRepo.delete(expRepo.findById(id).orElseThrow());
-    return "Experience item deleted successfully";
+    return expRepo.findAll();
   }
 
 }

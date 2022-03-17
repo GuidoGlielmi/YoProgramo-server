@@ -46,9 +46,9 @@ public class EducationService implements IEducationService {
   }
 
   @Override
-  public String deleteEducation(UUID id) {
+  public List<Education> deleteEducation(UUID id) {
     educationRepo.delete(educationRepo.findById(id).orElseThrow());
-    return "Education item deleted successfully";
+    return educationRepo.findAll();
   }
 
 }

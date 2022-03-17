@@ -12,6 +12,6 @@ public interface ISkillService {
 
   public Skills updateSkill(Skills skill);
 
-  public String deleteSkill(UUID id);
+  public List<Skills> deleteSkill(UUID id);
 
 }
