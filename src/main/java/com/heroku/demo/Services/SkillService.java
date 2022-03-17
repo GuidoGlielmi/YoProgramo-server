@@ -17,13 +17,13 @@ public class SkillService implements ISkillService {
 
   @Override
   public List<Skills> getSkills() {
-    return skillRepo.findAll();
+    return skillRepo.findAllByOrderByTypeAscNameAsc();
   }
 
   @Override
   public List<Skills> addSkill(Skills skill) {
     skillRepo.save(skill);
-    return skillRepo.findAll();
+    return skillRepo.findAllByOrderByTypeAscNameAsc();
   }
 
   @Override
@@ -45,7 +45,7 @@ public class SkillService implements ISkillService {
   @Override
   public List<Skills> deleteSkill(UUID id) {
     skillRepo.delete(skillRepo.findById(id).orElseThrow());
-    return skillRepo.findAll();
+    return skillRepo.findAllByOrderByTypeAscNameAsc();
   }
 
 }

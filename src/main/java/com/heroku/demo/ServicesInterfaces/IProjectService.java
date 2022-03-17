@@ -13,7 +13,7 @@ public interface IProjectService {
 
   public List<Projects> getProjects();
 
-  public Projects addProject(ProjectDto project);
+  public List<Projects> addProject(ProjectDto project);
 
   public Projects updateProject(ProjectDto project);
 

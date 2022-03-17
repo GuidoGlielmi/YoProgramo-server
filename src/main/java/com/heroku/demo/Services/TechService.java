@@ -28,7 +28,7 @@ public class TechService implements ITechService {
   @Override
   public List<Technologies> addTech(Technologies tech) {
     techRepo.save(tech);
-    return techRepo.findAll();
+    return techRepo.findAllByOrderByNameAsc();
   }
 
   @Override
@@ -51,7 +51,7 @@ public class TechService implements ITechService {
       projects.getTechs().remove(foundTech);
     }
     techRepo.delete(foundTech);
-    return techRepo.findAll();
+    return techRepo.findAllByOrderByNameAsc();
   }
 
 }

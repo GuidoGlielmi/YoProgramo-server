@@ -18,13 +18,13 @@ public class EducationService implements IEducationService {
 
   @Override
   public List<Education> getEducation() {
-    return educationRepo.findAll();
+    return educationRepo.findAllByOrderByDegreeAsc();
   }
 
   @Override
   public List<Education> addEducation(Education education) {
     educationRepo.save(education);
-    return educationRepo.findAll();
+    return educationRepo.findAllByOrderByDegreeAsc();
   }
 
   @Override
@@ -49,7 +49,7 @@ public class EducationService implements IEducationService {
   @Override
   public List<Education> deleteEducation(UUID id) {
     educationRepo.delete(educationRepo.findById(id).orElseThrow());
-    return educationRepo.findAll();
+    return educationRepo.findAllByOrderByDegreeAsc();
   }
 
 }

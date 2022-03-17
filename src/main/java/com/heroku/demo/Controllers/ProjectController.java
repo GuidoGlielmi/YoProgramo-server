@@ -25,7 +25,7 @@ public class ProjectController {
   }
 
   @PostMapping
-  public Projects addProject(@RequestBody ProjectDto project) {
+  public List<Projects> addProject(@RequestBody ProjectDto project) {
     return projectService.addProject(project);
   }
 

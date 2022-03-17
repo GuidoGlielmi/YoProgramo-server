@@ -32,11 +32,11 @@ public class ProjectService implements IProjectService {
 
   @Override
   public List<Projects> getProjects() {
-    return projectRepo.findAll();
+    return projectRepo.findAllByOrderByTitleAsc();
   }
 
   @Override
-  public Projects addProject(ProjectDto projectDto) {
+  public List<Projects> addProject(ProjectDto projectDto) {
     /* Since Technologies is ignoring the project property, it's necessary to use a DTO,
     because there is an inconsistency between a project that holds a tech and the same tech not holding said project */
     Projects newProject = projectDto.getProject();
@@ -46,10 +46,11 @@ public class ProjectService implements IProjectService {
     }
     projectRepo.save(newProject); // CascadeType.PERSIST is not useful since it doesn't link the url to the project, so accessing urlRepo would be necessary anyways.
     for (ProjectUrl newUrl : newProject.getUrls()) {
-      newUrl.setProject(newProject);
-      urlRepo.save(newUrl);
+      newUrl.setProject(newProject); // automatically constructs the project with the added url in the urls list, but not saves it ofc.
+      // projectRepo.save(newProject); // can't persist an url without an id, so it saves an empty one
+      urlRepo.save(newUrl); // this saves both the project and the url entries
     }
-    return newProject;
+    return projectRepo.findAllByOrderByTitleAsc();
   }
 
   @Override
@@ -74,7 +75,7 @@ public class ProjectService implements IProjectService {
       for (ProjectUrl url : updatedProject.getUrls()) {
         urlRepo.save(url);
       }
-      foundProject.setUrls(updatedProject.getUrls());
+      // foundProject.setUrls(updatedProject.getUrls());
     }
     if (!updatedProject.getTitle().isBlank()) {
       foundProject.setTitle(updatedProject.getTitle());
@@ -92,7 +93,7 @@ public class ProjectService implements IProjectService {
   public List<Projects> deleteProject(UUID projectId) {
     projectRepo.findById(projectId).orElseThrow();
     projectRepo.deleteById(projectId);// without CascadeType.REMOVE it's not possible to delete the project, since it's the child in the relation.
-    return projectRepo.findAll();
+    return projectRepo.findAllByOrderByTitleAsc();
   }
 
   ///////////////////////////////
@@ -120,7 +121,7 @@ public class ProjectService implements IProjectService {
 
   @Override
   public List<ProjectUrl> getUrls() {
-    return urlRepo.findAll();
+    return urlRepo.findAllByOrderByProjectAscUrlAsc();
   }
 
   @Override

@@ -17,13 +17,13 @@ public class ExperienceService implements IExperiencesService {
 
   @Override
   public List<Experiences> getExperiences(Experiences experience) {
-    return expRepo.findAll();
+    return expRepo.findAllByOrderByTitleAsc();
   }
 
   @Override
   public List<Experiences> addExperience(Experiences experience) {
     expRepo.save(experience);
-    return expRepo.findAll();
+    return expRepo.findAllByOrderByTitleAsc();
   }
 
   @Override
@@ -49,7 +49,7 @@ public class ExperienceService implements IExperiencesService {
   @Override
   public List<Experiences> deleteExperience(UUID id) {
     expRepo.delete(expRepo.findById(id).orElseThrow());
-    return expRepo.findAll();
+    return expRepo.findAllByOrderByTitleAsc();
   }
 
 }
