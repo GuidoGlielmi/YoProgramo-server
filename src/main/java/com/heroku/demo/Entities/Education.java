@@ -14,6 +14,7 @@ public class Education {
   private String startDate = "";
   private String endDate = "";
   private String degree = "";
+  private String educationImg = "";
 
   public UUID getId() {
     return this.id;
@@ -53,6 +54,14 @@ public class Education {
 
   public void setDegree(String degree) {
     this.degree = degree;
+  }
+
+  public String getEducationImg() {
+    return this.educationImg;
+  }
+
+  public void setEducationImg(String educationImg) {
+    this.educationImg = educationImg;
   }
 
 }

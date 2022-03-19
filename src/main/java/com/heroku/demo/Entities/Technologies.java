@@ -14,6 +14,7 @@ public class Technologies {
 	@GeneratedValue
 	private UUID id;
 	private String name = "";
+	private String techImg = "";
 	@JsonIgnore // This avoids recursion, can't be transfered as JSON
 	@ManyToMany(mappedBy = "techs") //the mapped entity is NOT the owner,
 	//so, when deleting, it's necessary to delete it from all the users and from the techs itself.
@@ -42,6 +43,14 @@ public class Technologies {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTechImg() {
+		return this.techImg;
+	}
+
+	public void setTechImg(String techImg) {
+		this.techImg = techImg;
 	}
 
 	public List<Projects> getProjects() {

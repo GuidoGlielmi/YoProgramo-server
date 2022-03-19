@@ -13,8 +13,9 @@ public class Projects {
   //@SequenceGenerator(name = "projects_id_seq", sequenceName = "projects_id_seq", allocationSize = 1)
   @GeneratedValue //AUTO by default
   private UUID id;
-  private String title;
-  private String description;
+  private String title = "";
+  private String description = "";
+  private String projectImg = "";
   @ManyToMany
   // Project IS the owner, so when deleting the project, it will automatically be removed from every single tech's project list
   private List<Technologies> techs = new ArrayList<Technologies>();
@@ -48,6 +49,14 @@ public class Projects {
     this.description = description;
   }
 
+  public String getProjectImg() {
+    return this.projectImg;
+  }
+
+  public void setProjectImg(String projectImg) {
+    this.projectImg = projectImg;
+  }
+
   public List<Technologies> getTechs() {
     return this.techs;
   }
@@ -71,4 +80,5 @@ public class Projects {
   public void addUrl(ProjectUrl url) {
     this.urls.add(url);
   }
+
 }

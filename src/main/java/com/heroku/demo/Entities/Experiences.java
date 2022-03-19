@@ -12,6 +12,8 @@ public class Experiences {
   private String startDate = "";
   private String endDate = "";
   private String description = "";
+  private String experienceImg = "";
+  private String certificate = "";
 
   public UUID getId() {
     return this.id;
@@ -51,6 +53,22 @@ public class Experiences {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public String getExperienceImg() {
+    return this.experienceImg;
+  }
+
+  public void setExperienceImg(String experienceImg) {
+    this.experienceImg = experienceImg;
+  }
+
+  public String getCertificate() {
+    return this.certificate;
+  }
+
+  public void setCertificate(String certificate) {
+    this.certificate = certificate;
   }
 
 }

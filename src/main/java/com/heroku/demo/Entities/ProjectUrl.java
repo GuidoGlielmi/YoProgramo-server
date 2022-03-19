@@ -16,6 +16,7 @@ public class ProjectUrl {
   private UUID id;
   @NonNull
   private String url;
+  private String name;
   @ManyToOne(fetch = FetchType.LAZY) // with just @ManyToOne the corresponding table is created but urls are not included in the projects themselves
   @JsonIgnore
   private Projects project;
@@ -41,6 +42,14 @@ public class ProjectUrl {
     this.url = url;
   }
 
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public Projects getProject() {
     return this.project;
   }
@@ -53,4 +62,7 @@ public class ProjectUrl {
     return project != null ? project.getId() : projectId;
   }
 
+  public void setProjectId(UUID projectId) {
+    this.projectId = projectId;
+  }
 }

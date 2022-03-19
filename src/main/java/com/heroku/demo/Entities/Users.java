@@ -15,6 +15,7 @@ public class Users {
   private String linkedInUrl = "";
   private String githubUrl = "";
   private String aboutMe = "";
+  private String profileImg = "";
 
   public UUID getId() {
     return this.id;
@@ -70,6 +71,14 @@ public class Users {
 
   public void setAboutMe(String aboutMe) {
     this.aboutMe = aboutMe;
+  }
+
+  public String getProfileImg() {
+    return this.profileImg;
+  }
+
+  public void setProfileImg(String profileImg) {
+    this.profileImg = profileImg;
   }
 
 }
