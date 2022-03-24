@@ -20,9 +20,8 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public List<Users> addUser(Users user) {
-    userRepo.save(user);
-    return userRepo.findAll();
+  public UUID addUser(Users user) {
+    return userRepo.save(user).getId();
   }
 
   @Override

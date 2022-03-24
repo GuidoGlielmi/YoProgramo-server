@@ -3,6 +3,7 @@ package com.heroku.demo.Controllers;
 import java.util.List;
 import java.util.UUID;
 
+import com.heroku.demo.DTO.ResponseStateDto;
 import com.heroku.demo.Entities.Technologies;
 import com.heroku.demo.ServicesInterfaces.ITechService;
 
@@ -22,18 +23,18 @@ public class TechController {
   }
 
   @PostMapping
-  public List<Technologies> addTech(@RequestBody Technologies tech) {
-    return techService.addTech(tech);
+  public ResponseStateDto addTech(@RequestBody Technologies tech) {
+    return new ResponseStateDto("Technology added successfully", techService.addTech(tech).toString());
   }
 
   @PutMapping
-  public Technologies updateTech(@RequestBody Technologies tech) {
-    return techService.updateTech(tech);
+  public ResponseStateDto updateTech(@RequestBody Technologies tech) {
+    return new ResponseStateDto("Technology saved successfully", techService.updateTech(tech));
   }
 
   @DeleteMapping("/{id}")
-  public List<Technologies> deleteTech(@PathVariable UUID id) {
-    return techService.deleteTech(id);
+  public ResponseStateDto deleteTech(@PathVariable UUID id) {
+    return new ResponseStateDto("Technology deleted successfully", techService.deleteTech(id));
   }
 
 }

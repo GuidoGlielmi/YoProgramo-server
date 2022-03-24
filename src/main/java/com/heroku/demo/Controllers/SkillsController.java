@@ -3,6 +3,7 @@ package com.heroku.demo.Controllers;
 import java.util.List;
 import java.util.UUID;
 
+import com.heroku.demo.DTO.ResponseStateDto;
 import com.heroku.demo.Entities.Skills;
 
 import com.heroku.demo.ServicesInterfaces.ISkillService;
@@ -23,18 +24,18 @@ public class SkillsController {
   }
 
   @PostMapping
-  public List<Skills> addSkill(@RequestBody Skills skill) {
-    return skillsService.addSkill(skill);
+  public ResponseStateDto addSkill(@RequestBody Skills skill) {
+    return new ResponseStateDto("Skill added successfully", skillsService.addSkill(skill).toString());
   }
 
   @PutMapping
-  public Skills updateSkill(@RequestBody Skills skill) {
-    return skillsService.updateSkill(skill);
+  public ResponseStateDto updateSkill(@RequestBody Skills skill) {
+    return new ResponseStateDto("Skill saved successfully", skillsService.updateSkill(skill));
   }
 
   @DeleteMapping("/{id}")
-  public List<Skills> deleteSkill(@PathVariable UUID id) {
-    return skillsService.deleteSkill(id);
+  public ResponseStateDto deleteSkill(@PathVariable UUID id) {
+    return new ResponseStateDto("Skill deleted successfully", skillsService.deleteSkill(id));
   }
 
 }

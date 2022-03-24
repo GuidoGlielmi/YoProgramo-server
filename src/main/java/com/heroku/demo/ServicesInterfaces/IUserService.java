@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public interface IUserService {
   public List<Users> getUsers();
 
-  public List<Users> addUser(Users user);
+  public UUID addUser(Users user);
 
   public Users updateUser(Users user);
 

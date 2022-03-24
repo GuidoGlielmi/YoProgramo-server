@@ -21,9 +21,8 @@ public class SkillService implements ISkillService {
   }
 
   @Override
-  public List<Skills> addSkill(Skills skill) {
-    skillRepo.save(skill);
-    return skillRepo.findAllByOrderByTypeAscNameAsc();
+  public UUID addSkill(Skills skill) {
+    return skillRepo.save(skill).getId();
   }
 
   @Override

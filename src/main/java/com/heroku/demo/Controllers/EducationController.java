@@ -3,6 +3,7 @@ package com.heroku.demo.Controllers;
 import java.util.List;
 import java.util.UUID;
 
+import com.heroku.demo.DTO.ResponseStateDto;
 import com.heroku.demo.Entities.Education;
 
 import com.heroku.demo.ServicesInterfaces.IEducationService;
@@ -22,19 +23,22 @@ public class EducationController {
     return educationService.getEducation();
   }
 
-  @PostMapping
-  public List<Education> addEducation(@RequestBody Education education) {
-    return educationService.addEducation(education);
+  @PostMapping /* (produces = "application/json") */
+  // return "{\"test\": \"Hello using @ResponseBody\"}";
+  public ResponseStateDto addEducation(@RequestBody Education education) {
+    return new ResponseStateDto("Education added successfully", educationService.addEducation(education).toString());
   }
 
   @PutMapping
-  public Education updateEducation(@RequestBody Education education) {
-    return educationService.updateEducation(education);
+  public ResponseStateDto updateEducation(@RequestBody Education education) {
+    educationService.updateEducation(education);
+    return new ResponseStateDto("Education saved successfully");
   }
 
   @DeleteMapping("/{id}")
-  public List<Education> deleteEducation(@PathVariable UUID id) {
-    return educationService.deleteEducation(id);
+  public ResponseStateDto deleteEducation(@PathVariable UUID id) {
+    educationService.deleteEducation(id);
+    return new ResponseStateDto("Education deleted successfully");
   }
 
 }

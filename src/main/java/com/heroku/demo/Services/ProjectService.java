@@ -36,7 +36,7 @@ public class ProjectService implements IProjectService {
   }
 
   @Override
-  public List<Projects> addProject(ProjectDto projectDto) {
+  public Projects addProject(ProjectDto projectDto) {
     /* Since Technologies is ignoring the project property, it's necessary to use a DTO,
     because there is an inconsistency between a project that holds a tech and the same tech not holding said project */
     Projects newProject = projectDto.getProject();
@@ -50,7 +50,7 @@ public class ProjectService implements IProjectService {
       // projectRepo.save(newProject); // can't persist an url without an id, so it saves an empty one
       urlRepo.save(newUrl); // this saves both the project and the url entries
     }
-    return projectRepo.findAllByOrderByTitleAsc();
+    return newProject;
   }
 
   @Override
@@ -125,11 +125,11 @@ public class ProjectService implements IProjectService {
   }
 
   @Override
-  public List<ProjectUrl> addUrl(ProjectUrl newUrl) {
+  public UUID addUrl(ProjectUrl newUrl) {
     Projects foundProject = projectRepo.findById(newUrl.getProjectId()).orElseThrow();
     newUrl.setProject(foundProject); //this automatically (without persisting it) adds the url to the project's list
     urlRepo.save(newUrl);
-    return foundProject.getUrls();
+    return newUrl.getId();
   }
 
   @Override

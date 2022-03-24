@@ -8,7 +8,7 @@ import com.heroku.demo.Entities.Experiences;
 public interface IExperiencesService {
   public List<Experiences> getExperiences(Experiences experience);
 
-  public List<Experiences> addExperience(Experiences experience);
+  public UUID addExperience(Experiences experience);
 
   public Experiences updateExperience(Experiences experience);
 

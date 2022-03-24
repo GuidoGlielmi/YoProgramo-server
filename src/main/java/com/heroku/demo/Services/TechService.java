@@ -26,9 +26,8 @@ public class TechService implements ITechService {
   }
 
   @Override
-  public List<Technologies> addTech(Technologies tech) {
-    techRepo.save(tech);
-    return techRepo.findAllByOrderByNameAsc();
+  public UUID addTech(Technologies tech) {
+    return techRepo.save(tech).getId();
   }
 
   @Override

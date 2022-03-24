@@ -21,9 +21,8 @@ public class ExperienceService implements IExperiencesService {
   }
 
   @Override
-  public List<Experiences> addExperience(Experiences experience) {
-    expRepo.save(experience);
-    return expRepo.findAllByOrderByTitleAsc();
+  public UUID addExperience(Experiences experience) {
+    return expRepo.save(experience).getId();
   }
 
   @Override

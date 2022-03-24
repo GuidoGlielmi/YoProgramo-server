@@ -3,6 +3,7 @@ package com.heroku.demo.Controllers;
 import java.util.List;
 import java.util.UUID;
 
+import com.heroku.demo.DTO.ResponseStateDto;
 import com.heroku.demo.Entities.Users;
 import com.heroku.demo.ServicesInterfaces.*;
 
@@ -22,17 +23,17 @@ public class UserController {
   }
 
   @PostMapping
-  public List<Users> addUser(@RequestBody Users user) {
-    return userService.addUser(user);
+  public ResponseStateDto addUser(@RequestBody Users user) {
+    return new ResponseStateDto("User added successfully", userService.addUser(user).toString());
   }
 
   @PutMapping
-  public Users updateUser(@RequestBody Users user) {
-    return userService.updateUser(user);
+  public ResponseStateDto updateUser(@RequestBody Users user) {
+    return new ResponseStateDto("User saved successfully", userService.updateUser(user));
   }
 
   @DeleteMapping("/{id}")
-  public List<Users> addUser(@PathVariable UUID id) {
-    return userService.deleteUser(id);
+  public ResponseStateDto addUser(@PathVariable UUID id) {
+    return new ResponseStateDto("User deleted successfully", userService.deleteUser(id));
   }
 }

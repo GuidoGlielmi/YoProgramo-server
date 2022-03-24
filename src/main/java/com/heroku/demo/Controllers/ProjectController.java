@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.UUID;
 
 import com.heroku.demo.DTO.ProjectDto;
+import com.heroku.demo.DTO.ResponseStateDto;
 import com.heroku.demo.Entities.ProjectUrl;
 import com.heroku.demo.Entities.Projects;
-import com.heroku.demo.Entities.Technologies;
 import com.heroku.demo.ServicesInterfaces.IProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,28 +26,30 @@ public class ProjectController {
   }
 
   @PostMapping
-  public List<Projects> addProject(@RequestBody ProjectDto project) {
-    return projectService.addProject(project);
+  public ResponseStateDto addProject(@RequestBody ProjectDto project) {
+    return new ResponseStateDto("Project added successfully", projectService.addProject(project));
   }
 
   @PutMapping
-  public Projects updateProject(@RequestBody ProjectDto project) {
-    return projectService.updateProject(project);
+  public ResponseStateDto updateProject(@RequestBody ProjectDto project) {
+    return new ResponseStateDto("Project saved successfully", projectService.updateProject(project));
   }
 
   @DeleteMapping("/{id}")
-  public List<Projects> deleteProject(@PathVariable UUID id) {
-    return projectService.deleteProject(id);
+  public ResponseStateDto deleteProject(@PathVariable UUID id) {
+    return new ResponseStateDto("Project deleted successfully", projectService.deleteProject(id));
   }
 
   @PostMapping("/{projectId}/tech/{techId}")
-  public List<Technologies> addTechToProject(@PathVariable UUID projectId, @PathVariable UUID techId) {
-    return projectService.addTechToProject(projectId, techId);
+  public ResponseStateDto addTechToProject(@PathVariable UUID projectId, @PathVariable UUID techId) {
+    return new ResponseStateDto("Technology added to project successfully",
+        projectService.addTechToProject(projectId, techId));
   }
 
   @DeleteMapping("/{projectId}/tech/{techId}")
-  public List<Technologies> removeTechFromProject(@PathVariable UUID projectId, @PathVariable UUID techId) {
-    return projectService.removeTechFromProject(projectId, techId);
+  public ResponseStateDto removeTechFromProject(@PathVariable UUID projectId, @PathVariable UUID techId) {
+    return new ResponseStateDto("Technology removed from project successfully",
+        projectService.removeTechFromProject(projectId, techId));
   }
 
   @GetMapping("/url")
@@ -56,18 +58,21 @@ public class ProjectController {
   }
 
   @PostMapping("/url")
-  public List<ProjectUrl> addUrl(@RequestBody ProjectUrl url) {
-    return projectService.addUrl(url);
+  public ResponseStateDto addUrl(@RequestBody ProjectUrl url) {
+    return new ResponseStateDto("URL added successfully",
+        projectService.addUrl(url).toString());
   }
 
   @PutMapping("/url")
-  public ProjectUrl updateUrl(@RequestBody ProjectUrl url) {
-    return projectService.updateUrl(url);
+  public ResponseStateDto updateUrl(@RequestBody ProjectUrl url) {
+    return new ResponseStateDto("URL saved successfully",
+        projectService.updateUrl(url));
   }
 
   @DeleteMapping("/url/{id}")
-  public List<ProjectUrl> deleteUrl(@PathVariable UUID id) {
-    return projectService.deleteUrl(id);
+  public ResponseStateDto deleteUrl(@PathVariable UUID id) {
+    return new ResponseStateDto("URL deleted successfully",
+        projectService.deleteUrl(id));
   }
 
 }

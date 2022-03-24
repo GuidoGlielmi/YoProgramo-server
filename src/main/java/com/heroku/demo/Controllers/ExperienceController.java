@@ -3,6 +3,7 @@ package com.heroku.demo.Controllers;
 import java.util.UUID;
 import java.util.List;
 
+import com.heroku.demo.DTO.ResponseStateDto;
 import com.heroku.demo.Entities.Experiences;
 
 import com.heroku.demo.ServicesInterfaces.IExperiencesService;
@@ -23,17 +24,19 @@ public class ExperienceController {
   }
 
   @PostMapping
-  public List<Experiences> addExperience(@RequestBody Experiences experience) {
-    return experienceService.addExperience(experience);
+  public ResponseStateDto addExperience(@RequestBody Experiences experience) {
+    return new ResponseStateDto("Experience added successfully",
+        experienceService.addExperience(experience).toString());
   }
 
   @PutMapping
-  public Experiences updateExperience(@RequestBody Experiences experience) {
-    return experienceService.updateExperience(experience);
+  public ResponseStateDto updateExperience(@RequestBody Experiences experience) {
+    return new ResponseStateDto("Experience saved successfully", experienceService.updateExperience(experience));
   }
 
   @DeleteMapping("/{id}")
-  public List<Experiences> deleteExperience(@PathVariable UUID id) {
-    return experienceService.deleteExperience(id);
+  public ResponseStateDto deleteExperience(@PathVariable UUID id) {
+    return new ResponseStateDto("Experience deleted successfully", experienceService.deleteExperience(id));
+
   }
 }
