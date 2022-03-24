@@ -40,10 +40,6 @@ public class ProjectService implements IProjectService {
     /* Since Technologies is ignoring the project property, it's necessary to use a DTO,
     because there is an inconsistency between a project that holds a tech and the same tech not holding said project */
     Projects newProject = projectDto.getProject();
-    for (UUID techId : projectDto.getTechsIds()) {
-      Technologies tech = techRepo.findById(techId).orElseThrow();
-      newProject.addTech(tech);
-    }
     projectRepo.save(newProject); // CascadeType.PERSIST is not useful since it doesn't link the url to the project, so accessing urlRepo would be necessary anyways.
     for (ProjectUrl newUrl : newProject.getUrls()) {
       newUrl.setProject(newProject); // automatically constructs the project with the added url in the urls list, but not saves it ofc.
