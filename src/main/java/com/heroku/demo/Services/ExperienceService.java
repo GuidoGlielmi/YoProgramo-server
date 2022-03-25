@@ -29,7 +29,8 @@ public class ExperienceService implements IExperiencesService {
   public Experiences updateExperience(Experiences experience) {
     UUID id = experience.getId();
     Experiences foundExperience = expRepo.findById(id).orElseThrow();
-    if (!experience.getTitle().isBlank()) {
+    foundExperience = experience;
+    /* if (!experience.getTitle().isBlank()) {
       foundExperience.setTitle(experience.getTitle());
     }
     if (!experience.getStartDate().isBlank()) {
@@ -40,7 +41,7 @@ public class ExperienceService implements IExperiencesService {
     }
     if (!experience.getDescription().isBlank()) {
       foundExperience.setDescription(experience.getDescription());
-    }
+    } */
     return expRepo.save(foundExperience);
 
   }

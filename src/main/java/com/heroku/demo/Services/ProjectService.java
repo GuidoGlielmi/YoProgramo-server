@@ -1,10 +1,8 @@
 package com.heroku.demo.Services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.heroku.demo.DTO.ProjectDto;
 import com.heroku.demo.Entities.Projects;
 import com.heroku.demo.Entities.Technologies;
 import com.heroku.demo.Entities.ProjectUrl;
@@ -36,53 +34,52 @@ public class ProjectService implements IProjectService {
   }
 
   @Override
-  public Projects addProject(ProjectDto projectDto) {
-    /* Since Technologies is ignoring the project property, it's necessary to use a DTO,
-    because there is an inconsistency between a project that holds a tech and the same tech not holding said project */
-    Projects newProject = projectDto.getProject();
-    projectRepo.save(newProject); // CascadeType.PERSIST is not useful since it doesn't link the url to the project, so accessing urlRepo would be necessary anyways.
+  public Projects addProject(Projects newProject) {
+    /*
+    the project property of technologies is ignored
+    but probably, because the project entity is the owner, by modifying and/or
+    persisting its techs' list, the pertinent technologies are updated as well,
+    being that they already have an id.
+    */
+    // Projects updatedProject = projectDto.getProject();
+    /* for (UUID techId : projectDto.getTechsIds()) {
+      Technologies tech = techRepo.findById(techId).orElseThrow();
+      updatedProject.addTech(tech);
+    } */
+    projectRepo.save(newProject); /* CascadeType.PERSIST is not useful since it doesn't link the url to the project, so accessing urlRepo would be necessary anyways.
+                                  It saves the urls like
+                                  {
+                                  id:'',
+                                  url:'...',
+                                  name:'...',
+                                  project:null
+                                  }
+                                  */
     for (ProjectUrl newUrl : newProject.getUrls()) {
       newUrl.setProject(newProject); // automatically constructs the project with the added url in the urls list, but not saves it ofc.
-      // projectRepo.save(newProject); // can't persist an url without an id, so it saves an empty one
+      // projectRepo.save(updatedProject); // can't persist an url without an id, so it would save an empty one
       urlRepo.save(newUrl); // this saves both the project and the url entries
     }
     return newProject;
   }
 
   @Override
-  public Projects updateProject(ProjectDto projectDto) {
-    Projects foundProject = projectRepo.findById(projectDto.getProject().getId()).orElseThrow();
-    Projects updatedProject = projectDto.getProject();
-
-    if (projectDto.getTechsIds() != null) {
-      List<Technologies> newTechs = new ArrayList<>();
-      for (UUID techId : projectDto.getTechsIds()) {
-        Technologies tech = techRepo.findById(techId).orElseThrow();
-        newTechs.add(tech);
-      }
-      foundProject.setTechs(newTechs);
-    }
-
+  public Projects updateProject(Projects updatedProject) {
+    Projects foundProject = projectRepo.findById(updatedProject.getId()).orElseThrow();
+    foundProject = updatedProject;
+    /*
+    the project property of technologies is ignored
+    but probably, because the project entity is the owner, by modifying and/or
+    persisting its techs' list, the pertinent technologies are updated as well,
+    being that they already have an id.
+    */
     if (updatedProject.getUrls() != null) {
-      // project is not the owner, so it's necessary to delete via urlRepo
-      for (ProjectUrl url : foundProject.getUrls()) {
-        urlRepo.deleteById(url.getId());
-      }
       for (ProjectUrl url : updatedProject.getUrls()) {
-        urlRepo.save(url);
+        url.setProject(foundProject);//this automatically (without persisting it) adds the url to the project's list
+        urlRepo.save(url); //  By being the owner, without persisting the url, the url entry doesn't get created, so it neither gets saved in the project
       }
-      // foundProject.setUrls(updatedProject.getUrls());
     }
-    if (!updatedProject.getTitle().isBlank()) {
-      foundProject.setTitle(updatedProject.getTitle());
-    }
-    if (!updatedProject.getTitle().isBlank()) {
-      foundProject.setTitle(updatedProject.getTitle());
-    }
-    if (!updatedProject.getDescription().isBlank()) {
-      foundProject.setDescription(updatedProject.getDescription());
-    }
-    return foundProject;
+    return projectRepo.save(foundProject);
   }
 
   @Override

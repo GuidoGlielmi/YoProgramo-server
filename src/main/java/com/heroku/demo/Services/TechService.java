@@ -33,14 +33,15 @@ public class TechService implements ITechService {
   @Override
   public Technologies updateTech(Technologies tech) {
     UUID id = tech.getId();
-    Technologies foundTechnologies = techRepo.findById(id).orElseThrow();
-    if (!tech.getName().isBlank()) {
+    Technologies foundTechnology = techRepo.findById(id).orElseThrow();
+    foundTechnology = tech;
+    /* if (!tech.getName().isBlank()) {
       foundTechnologies.setName(tech.getName());
     }
     if (tech.getProjects().size() != 0) {
       foundTechnologies.setProjects(tech.getProjects());
-    }
-    return techRepo.save(foundTechnologies);
+    } */
+    return techRepo.save(foundTechnology);
   }
 
   @Override

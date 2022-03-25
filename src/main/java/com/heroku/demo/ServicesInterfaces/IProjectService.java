@@ -7,15 +7,13 @@ import com.heroku.demo.Entities.ProjectUrl;
 import java.util.List;
 import java.util.UUID;
 
-import com.heroku.demo.DTO.ProjectDto;
-
 public interface IProjectService {
 
   public List<Projects> getProjects();
 
-  public Projects addProject(ProjectDto project);
+  public Projects addProject(Projects project);
 
-  public Projects updateProject(ProjectDto project);
+  public Projects updateProject(Projects project);
 
   public List<Projects> deleteProject(UUID projectId);
 

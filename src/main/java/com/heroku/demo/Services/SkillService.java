@@ -29,7 +29,8 @@ public class SkillService implements ISkillService {
   public Skills updateSkill(Skills skill) {
     UUID id = skill.getId();
     Skills foundSkill = skillRepo.findById(id).orElseThrow();
-    if (!skill.getName().isBlank()) {
+    foundSkill = skill;
+    /* if (!skill.getName().isBlank()) {
       foundSkill.setName(skill.getName());
     }
     if (!skill.getType().isBlank()) {
@@ -37,7 +38,7 @@ public class SkillService implements ISkillService {
     }
     if (skill.getAbilityPercentage() != 0) {
       foundSkill.setAbilityPercentage(skill.getAbilityPercentage());
-    }
+    } */
     return skillRepo.save(foundSkill);
   }
 

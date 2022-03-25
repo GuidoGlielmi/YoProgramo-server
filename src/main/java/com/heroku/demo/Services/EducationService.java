@@ -30,7 +30,8 @@ public class EducationService implements IEducationService {
   public Education updateEducation(Education education) {
     UUID id = education.getId();
     Education foundEducation = educationRepo.findById(id).orElseThrow();
-    if (!education.getSchool().isBlank()) {
+    foundEducation = education;
+    /* if (!education.getSchool().isBlank()) {
       foundEducation.setSchool(education.getSchool());
     }
     if (!education.getStartDate().isBlank()) {
@@ -41,7 +42,7 @@ public class EducationService implements IEducationService {
     }
     if (!education.getDegree().isBlank()) {
       foundEducation.setDegree(education.getDegree());
-    }
+    } */
     return educationRepo.save(foundEducation);
   }
 

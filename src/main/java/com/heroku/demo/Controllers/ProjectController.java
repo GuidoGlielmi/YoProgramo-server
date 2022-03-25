@@ -3,7 +3,6 @@ package com.heroku.demo.Controllers;
 import java.util.List;
 import java.util.UUID;
 
-import com.heroku.demo.DTO.ProjectDto;
 import com.heroku.demo.DTO.ResponseStateDto;
 import com.heroku.demo.Entities.ProjectUrl;
 import com.heroku.demo.Entities.Projects;
@@ -26,12 +25,12 @@ public class ProjectController {
   }
 
   @PostMapping
-  public ResponseStateDto addProject(@RequestBody ProjectDto project) {
+  public ResponseStateDto addProject(@RequestBody Projects project) {
     return new ResponseStateDto("Project added successfully", projectService.addProject(project));
   }
 
   @PutMapping
-  public ResponseStateDto updateProject(@RequestBody ProjectDto project) {
+  public ResponseStateDto updateProject(@RequestBody Projects project) {
     return new ResponseStateDto("Project saved successfully", projectService.updateProject(project));
   }
 
