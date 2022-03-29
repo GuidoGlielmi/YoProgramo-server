@@ -38,7 +38,7 @@ public class DemoApplication {
 		return new BCryptPasswordEncoder();
 	}
 
-	/* @Bean
+	@Bean
 	CommandLineRunner run(UserService userService, EducationService educationService, ExperienceService experienceService,
 			ProjectService projectService, SkillService skillService, TechService techService) {
 		return args -> {
@@ -50,15 +50,8 @@ public class DemoApplication {
 							"I live in Argentina, in the city of Rosario. I discovered -not so long ago- the programming world through microntrollers using the legendary C language, which from I developed a passion for automating and problem solving.",
 							"/assets/img/profile-img.jpg",
 							new ArrayList<>()));
-	
+
 			userService.addRoleToUser("guido", "ADMIN");
-			userService.addUser(
-					new Users(null, "genaro", "password", "Genaro", "Glielmi", "linkedinUrl",
-							"githubUrl",
-							"This is an 'aboutMe'", "",
-							new ArrayList<>()));
-	
-			userService.addRoleToUser("genaro", "USER");
 			educationService.addEducation(new Education(null, "Instituto Politécnico Superior", "04/2019", "Current",
 					"Technician in Electronic Systems", "/assets/logos/IPS-UNR.png"));
 			educationService.addEducation(new Education(null, "Universidad Nacional de Rosario - Escuela de Música",
@@ -68,8 +61,8 @@ public class DemoApplication {
 			experienceService.addExperience(new Experiences(null, "Argentina Programa", "Portfolio development", "11/2021",
 					"05/2022", "", "/assets/logos/AP.png"));
 			experienceService.addExperience(
-					new Experiences(null, "Taller Corazón de Manzana", "Customer attention and inventory management", "03/2018",
-							"01/2019", "", "/assets/logos/TCDM.jpg"));
+					new Experiences(null, "Taller Corazón de Manzana", "Customer attention and inventory management", "02/2020",
+							"06/2021", "", "/assets/logos/TCDM.jpg"));
 			skillService.addSkill(new Skills(null, "Proactive", 80, "HardAndSoft"));
 			skillService.addSkill(new Skills(null, "Active listening", 80, "HardAndSoft"));
 			skillService.addSkill(new Skills(null, "Empathy", 80, "HardAndSoft"));
@@ -116,7 +109,7 @@ public class DemoApplication {
 			UUID typescriptID = techService
 					.addTech(new Technologies(null, "Typescript", "/assets/logos/typescript.png", new ArrayList<>()));
 			Technologies typescript = techService.getTechById(typescriptID);
-	
+
 			List<Technologies> RRTechs = new ArrayList<Technologies>();
 			RRTechs.add(css);
 			RRTechs.add(html);
@@ -127,13 +120,13 @@ public class DemoApplication {
 			RRTechs.add(react);
 			RRTechs.add(redux);
 			RRTechs.add(css);
-	
+
 			List<Technologies> aerolabTechs = new ArrayList<Technologies>();
 			aerolabTechs.add(css);
 			aerolabTechs.add(html);
 			aerolabTechs.add(javascript);
 			aerolabTechs.add(next);
-	
+
 			List<Technologies> APTechs = new ArrayList<Technologies>();
 			APTechs.add(css);
 			APTechs.add(html);
@@ -155,7 +148,7 @@ public class DemoApplication {
 			projectService.addUrl(
 					new ProjectUrl(null, "https://github.com/GuidoGlielmi/German-MindSet-server", "German-MindSet-server", RR,
 							RR.getId()));
-	
+
 			Projects AP = projectService.addProject(new Projects(null, "Argentina Programa",
 					"Portfolio development",
 					"/assets/logos/AP.png", APTechs, new ArrayList<ProjectUrl>()));
@@ -165,16 +158,16 @@ public class DemoApplication {
 			projectService
 					.addUrl(new ProjectUrl(null, "https://github.com/GuidoGlielmi/YoProgramo-server", "YoProgramo-server", AP,
 							AP.getId()));
-	
+
 			Projects aerolab = projectService.addProject(new Projects(null, "Aerolab challenge",
 					"E-commerce landing page",
 					"/assets/logos/aerolab.jpg", aerolabTechs, new ArrayList<ProjectUrl>()));
-	
+
 			projectService
 					.addUrl(
 							new ProjectUrl(null, "https://github.com/GuidoGlielmi/Aerolab-challenge", "Aerolab-challenge", aerolab,
 									aerolab.getId()));
-	
+
 		};
-	} */
+	}
 }

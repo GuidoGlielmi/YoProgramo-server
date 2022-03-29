@@ -30,27 +30,21 @@ public class Config extends WebSecurityConfigurerAdapter {
   @Override
   // This is configurated before the app is fully loaded
   public void configure(HttpSecurity http) throws Exception {
-    /* // configuration for stateless sessions with tokenss
-    http.csrf().disable(); // cross site request forgery
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    // http.authorizeRequests().anyRequest().permitAll(); //everyone have access
-    // http.authorizeRequests().anyRequest(HttpMethod.GET, "**").hasAnyAuthority("");
-    http.authorizeRequests().antMatchers(HttpMethod.POST).hasRole("ADMIN");
-    http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));// filter for accessing the page */
     http.csrf().disable();
     http.cors().and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        // disables session creation on Spring Security
         .and().authorizeRequests()
         // the most restrictive rules are defined first
-        .antMatchers(HttpMethod.GET).permitAll() // ALL GET reqs
         .antMatchers(HttpMethod.POST, "/login").permitAll() // all POST reqs from /login
+        .antMatchers(HttpMethod.GET).permitAll() // ALL GET reqs
         // .anyRequest().authenticated() // any authenticated req
         .anyRequest().hasRole("ADMIN") // any ADMIN (same as .hasAuthority("ROLE_ADMIN"))
         // Without an admin role the filters doesn't event get called
         .and()
-        .addFilter(new JwtAuthenticationFilter(authenticationManager())) // this replaces authenticationManagerBean()
+        .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+        /* The authenticationManager attempts to authenticate the passed Authentication object, returning a fully populated Authentication object (including granted authorities) if successful */
         .addFilter(new JwtAuthorizationFilter(authenticationManager()));
-    // disables session creation on Spring Security
 
   }
 
@@ -62,15 +56,8 @@ public class Config extends WebSecurityConfigurerAdapter {
                 .roles("admin_role")
                  */
     auth.userDetailsService(userDetailsService).passwordEncoder(passEncoder);
-    // we are using the implementation of userDetailsService, the UserService class. 
+    // the implementation of userDetailsService is the UserService class. 
   }
-
-  /*   @Bean
-  @Override
-  public AuthenticationManager authenticationManagerBean() throws Exception {
-    return super.authenticationManagerBean();
-  }
-   */
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
