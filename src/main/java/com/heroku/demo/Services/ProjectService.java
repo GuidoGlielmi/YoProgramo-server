@@ -13,8 +13,10 @@ import com.heroku.demo.ServicesInterfaces.IProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ProjectService implements IProjectService {
 
   @Autowired
@@ -34,6 +36,7 @@ public class ProjectService implements IProjectService {
   }
 
   @Override
+  @Transactional(rollbackFor = Exception.class)
   public Projects addProject(Projects newProject) {
     /*
     the project property of technologies is ignored
@@ -46,15 +49,16 @@ public class ProjectService implements IProjectService {
       Technologies tech = techRepo.findById(techId).orElseThrow();
       updatedProject.addTech(tech);
     } */
-    projectRepo.save(newProject); /* CascadeType.PERSIST is not useful since it doesn't link the url to the project, so accessing urlRepo would be necessary anyways.
-                                  It saves the urls like
-                                  {
-                                  id:'',
-                                  url:'...',
-                                  name:'...',
-                                  project:null
-                                  }
-                                  */
+    projectRepo.save(newProject);
+    /* CascadeType.PERSIST is not useful since it doesn't link the url to the project, so accessing urlRepo would be necessary anyways.
+    It saves the urls like
+    {
+    id:'',
+    url:'...',
+    name:'...',
+    project:null
+    }
+    */
     for (ProjectUrl newUrl : newProject.getUrls()) {
       newUrl.setProject(newProject); // automatically constructs the project with the added url in the urls list, but not saves it ofc.
       // projectRepo.save(updatedProject); // can't persist an url without an id, so it would save an empty one
@@ -84,8 +88,8 @@ public class ProjectService implements IProjectService {
 
   @Override
   public List<Projects> deleteProject(UUID projectId) {
-    projectRepo.findById(projectId).orElseThrow();
-    projectRepo.deleteById(projectId);// without CascadeType.REMOVE it's not possible to delete the project, since it's the child in the relation.
+    Projects foundProject = projectRepo.findById(projectId).orElseThrow();
+    projectRepo.delete(foundProject);// without CascadeType.REMOVE it's not possible to delete the project, since it's the child in the relation.
     return projectRepo.findAllByOrderByTitleAsc();
   }
 

@@ -31,18 +31,6 @@ public class EducationService implements IEducationService {
     UUID id = education.getId();
     Education foundEducation = educationRepo.findById(id).orElseThrow();
     foundEducation = education;
-    /* if (!education.getSchool().isBlank()) {
-      foundEducation.setSchool(education.getSchool());
-    }
-    if (!education.getStartDate().isBlank()) {
-      foundEducation.setStartDate(education.getStartDate());
-    }
-    if (!education.getEndDate().isBlank()) {
-      foundEducation.setEndDate(education.getEndDate());
-    }
-    if (!education.getDegree().isBlank()) {
-      foundEducation.setDegree(education.getDegree());
-    } */
     return educationRepo.save(foundEducation);
   }
 

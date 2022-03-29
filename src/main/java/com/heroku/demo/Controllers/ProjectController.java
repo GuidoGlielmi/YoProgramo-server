@@ -11,7 +11,6 @@ import com.heroku.demo.ServicesInterfaces.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping("projects")
 public class ProjectController {

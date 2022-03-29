@@ -9,7 +9,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.lang.NonNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProjectUrl {
   @Id
   @GeneratedValue
@@ -26,43 +33,7 @@ public class ProjectUrl {
   private UUID projectId;
 
   // Every function starting with "get" gets included when calling findAll()
-  public UUID getId() {
-    return this.id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
-
-  public String getUrl() {
-    return this.url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Projects getProject() {
-    return this.project;
-  }
-
-  public void setProject(Projects project) {
-    this.project = project;
-  }
-
   public UUID getProjectId() {
     return project != null ? project.getId() : projectId;
-  }
-
-  public void setProjectId(UUID projectId) {
-    this.projectId = projectId;
   }
 }

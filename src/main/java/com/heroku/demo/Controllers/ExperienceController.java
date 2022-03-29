@@ -11,7 +11,6 @@ import com.heroku.demo.ServicesInterfaces.IExperiencesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping("experiences")
 public class ExperienceController {

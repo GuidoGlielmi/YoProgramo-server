@@ -26,6 +26,11 @@ public class TechService implements ITechService {
   }
 
   @Override
+  public Technologies getTechById(UUID techId) {
+    return techRepo.findById(techId).orElseThrow();
+  }
+
+  @Override
   public UUID addTech(Technologies tech) {
     return techRepo.save(tech).getId();
   }

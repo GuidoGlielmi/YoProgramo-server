@@ -7,7 +7,14 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Projects {
   @Id
   //@SequenceGenerator(name = "projects_id_seq", sequenceName = "projects_id_seq", allocationSize = 1)
@@ -25,56 +32,9 @@ public class Projects {
   private List<ProjectUrl> urls = new ArrayList<ProjectUrl>();
 
   /* @JoinColumn creates a column in the many side of the relation with the given name that references the PK of the parent entity, unless referencedColumnName is specified */
-  public UUID getId() {
-    return this.id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
-
-  public String getTitle() {
-    return this.title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getDescription() {
-    return this.description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getProjectImg() {
-    return this.projectImg;
-  }
-
-  public void setProjectImg(String projectImg) {
-    this.projectImg = projectImg;
-  }
-
-  public List<Technologies> getTechs() {
-    return this.techs;
-  }
-
-  public void setTechs(List<Technologies> technologies) {
-    this.techs = technologies;
-  }
 
   public void addTech(Technologies tech) {
     this.techs.add(tech);
-  }
-
-  public List<ProjectUrl> getUrls() {
-    return this.urls;
-  }
-
-  public void setUrls(List<ProjectUrl> urls) {
-    this.urls = urls;
   }
 
   public void addUrl(ProjectUrl url) {

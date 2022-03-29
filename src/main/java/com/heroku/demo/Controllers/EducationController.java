@@ -9,9 +9,9 @@ import com.heroku.demo.Entities.Education;
 import com.heroku.demo.ServicesInterfaces.IEducationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping("education")
 public class EducationController {
@@ -25,6 +25,7 @@ public class EducationController {
 
   @PostMapping /* (produces = "application/json") */
   // return "{\"test\": \"Hello using @ResponseBody\"}";
+  @ResponseStatus(value = HttpStatus.CREATED)
   public ResponseStateDto addEducation(@RequestBody Education education) {
     return new ResponseStateDto("Education added successfully", educationService.addEducation(education).toString());
   }

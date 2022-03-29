@@ -8,6 +8,8 @@ import com.heroku.demo.Entities.Technologies;
 public interface ITechService {
   public List<Technologies> getTechs();
 
+  public Technologies getTechById(UUID id);
+
   public UUID addTech(Technologies tech);
 
   public Technologies updateTech(Technologies tech);

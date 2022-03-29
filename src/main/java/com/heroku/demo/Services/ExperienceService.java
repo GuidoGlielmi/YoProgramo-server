@@ -30,18 +30,6 @@ public class ExperienceService implements IExperiencesService {
     UUID id = experience.getId();
     Experiences foundExperience = expRepo.findById(id).orElseThrow();
     foundExperience = experience;
-    /* if (!experience.getTitle().isBlank()) {
-      foundExperience.setTitle(experience.getTitle());
-    }
-    if (!experience.getStartDate().isBlank()) {
-      foundExperience.setStartDate(experience.getStartDate());
-    }
-    if (!experience.getEndDate().isBlank()) {
-      foundExperience.setEndDate(experience.getEndDate());
-    }
-    if (!experience.getDescription().isBlank()) {
-      foundExperience.setDescription(experience.getDescription());
-    } */
     return expRepo.save(foundExperience);
 
   }
