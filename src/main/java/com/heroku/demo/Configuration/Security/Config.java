@@ -62,11 +62,11 @@ public class Config extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:3000", "https://yoprogramoapp.web.app/"));
     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     configuration.setAllowedHeaders(Arrays.asList("*"));
     configuration.setExposedHeaders(Arrays.asList("Authorization"));
-    /* a “simple request” is one that meets all the following conditions: 
+    /* a “simple request” is one that meets all the following conditions:s
     One of the allowed methods: GET, HEAD, POST
     The only headers we can use:
         Accept, Accept-Language, Content-Language,

@@ -38,7 +38,7 @@ public class DemoApplication {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
+	/* @Bean
 	CommandLineRunner run(UserService userService, EducationService educationService, ExperienceService experienceService,
 			ProjectService projectService, SkillService skillService, TechService techService) {
 		return args -> {
@@ -169,5 +169,5 @@ public class DemoApplication {
 									aerolab.getId()));
 
 		};
-	}
+	} */
 }
