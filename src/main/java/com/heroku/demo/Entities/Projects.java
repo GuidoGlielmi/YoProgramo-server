@@ -1,6 +1,5 @@
 package com.heroku.demo.Entities;
 
-// import java.io.Serializable;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,7 @@ public class Projects {
   private String title = "";
   private String description = "";
   private String projectImg = "";
+  private String deployUrl = "";
   @ManyToMany
   // Project IS the owner, so when deleting the project, it will automatically be removed from every single tech's project list
   private List<Technologies> techs = new ArrayList<Technologies>();
@@ -32,6 +32,15 @@ public class Projects {
   private List<ProjectUrl> urls = new ArrayList<ProjectUrl>();
 
   /* @JoinColumn creates a column in the many side of the relation with the given name that references the PK of the parent entity, unless referencedColumnName is specified */
+
+  public Projects(String title, String description, String projectImg, List<Technologies> techs,
+      List<ProjectUrl> urls) {
+    this.title = title;
+    this.description = description;
+    this.projectImg = projectImg;
+    this.techs = techs;
+    this.urls = urls;
+  }
 
   public void addTech(Technologies tech) {
     this.techs.add(tech);

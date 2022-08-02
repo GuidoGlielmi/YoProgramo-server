@@ -1,6 +1,5 @@
 package com.heroku.demo.Controllers;
 
-import java.util.List;
 import java.util.UUID;
 
 import com.heroku.demo.DTO.ResponseStateDto;
@@ -9,6 +8,7 @@ import com.heroku.demo.Entities.Users;
 import com.heroku.demo.ServicesInterfaces.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.Data;
@@ -20,34 +20,75 @@ public class UserController {
   private IUserService userService;
 
   @PostMapping("/role")
-  public ResponseStateDto addRole(@RequestBody Role role) {
-    return new ResponseStateDto("Role added successfully", userService.addRole(role).toString());
+  public ResponseEntity<ResponseStateDto> addRole(@RequestBody Role role) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(userService.addRole(role).toString());
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @PostMapping("/role/user")
-  public ResponseStateDto addRoleToUser(@RequestBody AddRoleToUserForm roleToUser) {
-    return new ResponseStateDto("Role added successfully",
-        userService.addRoleToUser(roleToUser.getUsername(), roleToUser.getRoleName()));
+  public ResponseEntity<ResponseStateDto> addRoleToUser(@RequestBody AddRoleToUserForm roleToUser) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(userService.addRoleToUser(roleToUser.getUsername(), roleToUser.getRoleName()));
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @GetMapping
-  public List<Users> getUsers() {
-    return userService.getUsers();
+  public ResponseEntity<ResponseStateDto> getUsers() {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(userService.getUsers());
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @PostMapping
-  public ResponseStateDto addUser(@RequestBody Users user) {
-    return new ResponseStateDto("User added successfully", userService.addUser(user).toString());
+  public ResponseEntity<ResponseStateDto> addUser(@RequestBody Users user) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(userService.addUser(user).toString());
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @PutMapping
-  public ResponseStateDto updateUser(@RequestBody Users user) {
-    return new ResponseStateDto("User saved successfully", userService.updateUser(user));
+  public ResponseEntity<ResponseStateDto> updateUser(@RequestBody Users user) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(userService.updateUser(user));
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @DeleteMapping("/{id}")
-  public ResponseStateDto addUser(@PathVariable UUID id) {
-    return new ResponseStateDto("User deleted successfully", userService.deleteUser(id));
+  public ResponseEntity<ResponseStateDto> addUser(@PathVariable UUID id) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(userService.deleteUser(id));
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
 }

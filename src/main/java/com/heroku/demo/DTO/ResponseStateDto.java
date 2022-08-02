@@ -1,16 +1,30 @@
 package com.heroku.demo.DTO;
 
-public class ResponseStateDto {
-  private Object data = "";
-  private String msg;
+import org.springframework.http.HttpStatus;
 
-  public ResponseStateDto(String msg, Object data) {
+public class ResponseStateDto {
+  private Object data = null;
+  private String message = HttpStatus.resolve(200).name();
+  private int status = 200;
+
+  public ResponseStateDto(Object data) {
     this.data = data;
-    this.msg = msg;
   }
 
-  public ResponseStateDto(String msg) {
-    this.msg = msg;
+  public ResponseStateDto(int status) {
+    this.message = HttpStatus.resolve(status).name();
+    this.status = status;
+  }
+
+  public ResponseStateDto() {
+  }
+
+  public int getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
   }
 
   public Object getData() {
@@ -21,12 +35,20 @@ public class ResponseStateDto {
     this.data = data;
   }
 
-  public String getMsg() {
-    return this.msg;
+  public String getMessage() {
+    return this.message;
   }
 
-  public void setMsg(String msg) {
-    this.msg = msg;
+  public void setMessage(String message) {
+    this.message = message;
   }
 
+  public String toString() {
+    Object data = null;
+    if (this.data != null)
+      data = this.data.toString();
+    return "{\"data\": " + data + ", "
+        + "\"status\": " + this.status + ", "
+        + "\"message\": \"" + this.message + "\"}";
+  }
 }

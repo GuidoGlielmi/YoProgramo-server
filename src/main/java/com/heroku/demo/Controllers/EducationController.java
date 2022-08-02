@@ -1,6 +1,5 @@
 package com.heroku.demo.Controllers;
 
-import java.util.List;
 import java.util.UUID;
 
 import com.heroku.demo.DTO.ResponseStateDto;
@@ -10,6 +9,7 @@ import com.heroku.demo.ServicesInterfaces.IEducationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,27 +19,53 @@ public class EducationController {
   private IEducationService educationService;
 
   @GetMapping
-  public List<Education> getEducation() {
-    return educationService.getEducation();
+  public ResponseEntity<ResponseStateDto> getEducation() {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(educationService.getEducation());
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @PostMapping /* (produces = "application/json") */
   // return "{\"test\": \"Hello using @ResponseBody\"}";
   @ResponseStatus(value = HttpStatus.CREATED)
-  public ResponseStateDto addEducation(@RequestBody Education education) {
-    return new ResponseStateDto("Education added successfully", educationService.addEducation(education).toString());
+  public ResponseEntity<ResponseStateDto> addEducation(@RequestBody Education education) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(educationService.addEducation(education).toString());
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @PutMapping
-  public ResponseStateDto updateEducation(@RequestBody Education education) {
-    educationService.updateEducation(education);
-    return new ResponseStateDto("Education saved successfully");
+  public ResponseEntity<ResponseStateDto> updateEducation(@RequestBody Education education) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(educationService.updateEducation(education));
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
   @DeleteMapping("/{id}")
-  public ResponseStateDto deleteEducation(@PathVariable UUID id) {
-    educationService.deleteEducation(id);
-    return new ResponseStateDto("Education deleted successfully");
+  public ResponseEntity<ResponseStateDto> deleteEducation(@PathVariable UUID id) {
+    ResponseStateDto res;
+    try {
+      res = new ResponseStateDto(educationService.deleteEducation(id));
+      return ResponseEntity.ok().body(res);
+    } catch (Exception err) {
+      res = new ResponseStateDto(500);
+      return ResponseEntity.internalServerError().body(res);
+    }
   }
 
 }

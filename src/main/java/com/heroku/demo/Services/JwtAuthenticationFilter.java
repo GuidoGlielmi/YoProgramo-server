@@ -29,6 +29,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
   public JwtAuthenticationFilter(AuthenticationManager authManager) {
     this.authManager = authManager; // passed in config
+    super.setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
     setFilterProcessesUrl("/login"); // this is created by default
   };
 
@@ -53,7 +54,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
       Authentication authResult) throws IOException, ServletException {
     String SECRET = "secret";
-    int EXPIRATION_TIME = 900_000;
+    int EXPIRATION_TIME = 86_400_000; //one day
     User user = (User) authResult.getPrincipal();
     String token = JWT.create()
         .withSubject(user.getUsername())
@@ -61,9 +62,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         .withClaim("roles",
             user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
         .sign(Algorithm.HMAC512(SECRET));
-    response.setHeader("Authorization", token);
+    // response.setHeader("Authorization", token);
     response.setContentType("application/json");
-    ResponseStateDto responseObject = new ResponseStateDto("Logged in successfully", "");
+    ResponseStateDto responseObject = new ResponseStateDto(token);
     new ObjectMapper().writeValue(response.getOutputStream(), responseObject);
   }
 

@@ -2,6 +2,7 @@ package com.heroku.demo.Configuration.Security;
 
 import java.util.Arrays;
 
+import com.heroku.demo.Services.JWTAuthenticationFailureHandler;
 import com.heroku.demo.Services.JwtAuthenticationFilter;
 import com.heroku.demo.Services.JwtAuthorizationFilter;
 
@@ -40,6 +41,7 @@ public class Config extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET).permitAll() // ALL GET reqs
         // .anyRequest().authenticated() // any authenticated req
         .anyRequest().hasRole("ADMIN") // any ADMIN (same as .hasAuthority("ROLE_ADMIN"))
+        .and().formLogin().failureHandler(new JWTAuthenticationFailureHandler())
         // Without an admin role the filters doesn't event get called
         .and()
         .addFilter(new JwtAuthenticationFilter(authenticationManager()))
