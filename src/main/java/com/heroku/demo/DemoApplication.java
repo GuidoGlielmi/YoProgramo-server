@@ -48,21 +48,21 @@ public class DemoApplication {
 					new Users(null, "guido", "password", "Guido", "Glielmi", "https://www.linkedin.com/in/guido-glielmi/",
 							"https://github.com/GuidoGlielmi",
 							"I live in Argentina, in the city of Rosario. I discovered -not so long ago- the programming world through microntrollers using the legendary C language, which from I developed a passion for automating and problem solving.",
-							"/assets/img/profile-img.jpg",
+							"./assets/img/profile-img.jpg",
 							new ArrayList<>()));
 
 			userService.addRoleToUser("guido", "ADMIN");
 			educationService.addEducation(new Education(null, "Instituto Politécnico Superior", "04/2019", "Current",
-					"Technician in Electronic Systems", "/assets/logos/IPS-UNR.png"));
+					"Technician in Electronic Systems", "./assets/logos/IPS-UNR.png"));
 			educationService.addEducation(new Education(null, "Universidad Nacional de Rosario - Escuela de Música",
-					"04/2016", "11/2019", "Sound and Recording Technician", "/assets/logos/fhya.png"));
+					"04/2016", "11/2019", "Sound and Recording Technician", "./assets/logos/fhya.png"));
 			experienceService.addExperience(new Experiences(null, "Radium Rocket", "MERN stack Bootcamp", "09/2021",
-					"01/2022", "/assets/img/certificates/RR.jpg", "/assets/logos/RR.png"));
+					"01/2022", "./assets/img/certificates/RR.jpg", "./assets/logos/RR.png"));
 			experienceService.addExperience(new Experiences(null, "Argentina Programa", "Portfolio development", "11/2021",
-					"05/2022", "", "/assets/logos/AP.png"));
+					"05/2022", "", "./assets/logos/AP.png"));
 			experienceService.addExperience(
 					new Experiences(null, "Taller Corazón de Manzana", "Customer attention and inventory management", "02/2020",
-							"06/2021", "", "/assets/logos/TCDM.jpg"));
+							"06/2021", "", "./assets/logos/TCDM.jpg"));
 			skillService.addSkill(new Skills(null, "Proactive", 80, "Hard and Soft"));
 			skillService.addSkill(new Skills(null, "Active listening", 80, "Hard and Soft"));
 			skillService.addSkill(new Skills(null, "Empathy", 80, "Hard and Soft"));
@@ -72,42 +72,43 @@ public class DemoApplication {
 			skillService.addSkill(new Skills(null, "English", 80, "Language"));
 			skillService.addSkill(new Skills(null, "日本語 / Japanese", 20, "Language"));
 			UUID angularID = techService
-					.addTech(new Technologies(null, "Angular", "/assets/logos/angular.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Angular", "./assets/logos/angular.png", new ArrayList<>()));
 			Technologies angular = techService.getTechById(angularID);
-			UUID cssID = techService.addTech(new Technologies(null, "CSS3", "/assets/logos/css3.png", new ArrayList<>()));
+			UUID cssID = techService.addTech(new Technologies(null, "CSS3", "./assets/logos/css3.png", new ArrayList<>()));
 			Technologies css = techService.getTechById(cssID);
 			UUID expressID = techService
-					.addTech(new Technologies(null, "Express.js", "/assets/logos/expressjs.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Express.js", "./assets/logos/expressjs.png", new ArrayList<>()));
 			Technologies express = techService.getTechById(expressID);
-			UUID htmlID = techService.addTech(new Technologies(null, "HTML5", "/assets/logos/html5.png", new ArrayList<>()));
+			UUID htmlID = techService.addTech(new Technologies(null, "HTML5", "./assets/logos/html5.png", new ArrayList<>()));
 			Technologies html = techService.getTechById(htmlID);
-			UUID javaID = techService.addTech(new Technologies(null, "Java", "/assets/logos/java.png", new ArrayList<>()));
+			UUID javaID = techService.addTech(new Technologies(null, "Java", "./assets/logos/java.png", new ArrayList<>()));
 			Technologies java = techService.getTechById(javaID);
 			UUID javascriptID = techService
-					.addTech(new Technologies(null, "Javascript", "/assets/logos/javascript.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Javascript", "./assets/logos/javascript.png", new ArrayList<>()));
 			Technologies javascript = techService.getTechById(javascriptID);
 			UUID mongoID = techService
-					.addTech(new Technologies(null, "MongoDB", "/assets/logos/mongodb.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "MongoDB", "./assets/logos/mongodb.png", new ArrayList<>()));
 			Technologies mongo = techService.getTechById(mongoID);
 			UUID nextID = techService
-					.addTech(new Technologies(null, "Next.js", "/assets/logos/nextjs.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Next.js", "./assets/logos/nextjs.png", new ArrayList<>()));
 			Technologies next = techService.getTechById(nextID);
 			UUID nodeID = techService
-					.addTech(new Technologies(null, "Node.js", "/assets/logos/nodejs.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Node.js", "./assets/logos/nodejs.png", new ArrayList<>()));
 			Technologies node = techService.getTechById(nodeID);
 			UUID postgreID = techService
-					.addTech(new Technologies(null, "PostgreSQL", "/assets/logos/postgresql.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "PostgreSQL", "./assets/logos/postgresql.png", new ArrayList<>()));
 			Technologies postgre = techService.getTechById(postgreID);
 			UUID springID = techService
-					.addTech(new Technologies(null, "Redux", "/assets/logos/redux.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Redux", "./assets/logos/redux.png", new ArrayList<>()));
 			Technologies spring = techService.getTechById(springID);
-			UUID reactID = techService.addTech(new Technologies(null, "React", "/assets/logos/react.png", new ArrayList<>()));
+			UUID reactID = techService
+					.addTech(new Technologies(null, "React", "./assets/logos/react.png", new ArrayList<>()));
 			Technologies react = techService.getTechById(reactID);
 			UUID reduxID = techService
-					.addTech(new Technologies(null, "Spring", "/assets/logos/spring.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Spring", "./assets/logos/spring.png", new ArrayList<>()));
 			Technologies redux = techService.getTechById(reduxID);
 			UUID typescriptID = techService
-					.addTech(new Technologies(null, "Typescript", "/assets/logos/typescript.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Typescript", "./assets/logos/typescript.png", new ArrayList<>()));
 			Technologies typescript = techService.getTechById(typescriptID);
 
 			List<Technologies> RRTechs = new ArrayList<Technologies>();
@@ -137,7 +138,7 @@ public class DemoApplication {
 			APTechs.add(typescript);
 			Projects RR = projectService.addProject(new Projects("Radium Rocket",
 					"Development of a fictional enterprise that matches applicants with open jobs from client companies",
-					"/assets/logos/RR.png", RRTechs, new ArrayList<ProjectUrl>()));
+					"./assets/logos/RR.png", RRTechs, new ArrayList<ProjectUrl>()));
 			projectService
 					.addUrl(new ProjectUrl(null, "https://github.com/GuidoGlielmi/German-MindSet-app", "German-MindSet-app", RR,
 							RR.getId()));
@@ -150,7 +151,7 @@ public class DemoApplication {
 
 			Projects AP = projectService.addProject(new Projects("Argentina Programa",
 					"Portfolio development",
-					"/assets/logos/AP.png", APTechs, new ArrayList<ProjectUrl>()));
+					"./assets/logos/AP.png", APTechs, new ArrayList<ProjectUrl>()));
 			projectService
 					.addUrl(new ProjectUrl(null, "https://github.com/GuidoGlielmi/YoProgramo-server", "YoProgramo-server", AP,
 							AP.getId()));
@@ -160,7 +161,7 @@ public class DemoApplication {
 
 			Projects aerolab = projectService.addProject(new Projects("Aerolab challenge",
 					"E-commerce landing page",
-					"/assets/logos/aerolab.jpg", aerolabTechs, new ArrayList<ProjectUrl>()));
+					"./assets/logos/aerolab.jpg", aerolabTechs, new ArrayList<ProjectUrl>()));
 
 			projectService
 					.addUrl(
