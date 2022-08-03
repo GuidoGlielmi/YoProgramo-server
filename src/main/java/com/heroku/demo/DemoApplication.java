@@ -61,8 +61,8 @@ public class DemoApplication {
 			experienceService.addExperience(new Experiences(null, "Argentina Programa", "Portfolio development", "11/2021",
 					"05/2022", "", "./assets/logos/AP.png"));
 			experienceService.addExperience(
-					new Experiences(null, "Taller Corazón de Manzana", "Customer attention and inventory management", "02/2020",
-							"06/2021", "", "./assets/logos/TCDM.jpg"));
+					new Experiences(null, "Taller Corazón de Manzana", "Customer attention and inventory management", "02/2019",
+							"current", "", "./assets/logos/TCDM.jpg"));
 			skillService.addSkill(new Skills(null, "Proactive", 80, "Hard and Soft"));
 			skillService.addSkill(new Skills(null, "Active listening", 80, "Hard and Soft"));
 			skillService.addSkill(new Skills(null, "Empathy", 80, "Hard and Soft"));
@@ -98,15 +98,15 @@ public class DemoApplication {
 			UUID postgreID = techService
 					.addTech(new Technologies(null, "PostgreSQL", "./assets/logos/postgresql.png", new ArrayList<>()));
 			Technologies postgre = techService.getTechById(postgreID);
-			UUID springID = techService
-					.addTech(new Technologies(null, "Redux", "./assets/logos/redux.png", new ArrayList<>()));
-			Technologies spring = techService.getTechById(springID);
 			UUID reactID = techService
 					.addTech(new Technologies(null, "React", "./assets/logos/react.png", new ArrayList<>()));
 			Technologies react = techService.getTechById(reactID);
 			UUID reduxID = techService
-					.addTech(new Technologies(null, "Spring", "./assets/logos/spring.png", new ArrayList<>()));
+					.addTech(new Technologies(null, "Redux", "./assets/logos/redux.png", new ArrayList<>()));
 			Technologies redux = techService.getTechById(reduxID);
+			UUID springID = techService
+					.addTech(new Technologies(null, "Spring", "./assets/logos/spring.png", new ArrayList<>()));
+			Technologies spring = techService.getTechById(springID);
 			UUID typescriptID = techService
 					.addTech(new Technologies(null, "Typescript", "./assets/logos/typescript.png", new ArrayList<>()));
 			Technologies typescript = techService.getTechById(typescriptID);
@@ -136,6 +136,14 @@ public class DemoApplication {
 			APTechs.add(spring);
 			APTechs.add(angular);
 			APTechs.add(typescript);
+
+			List<Technologies> alkemyTechs = new ArrayList<Technologies>();
+			alkemyTechs.add(css);
+			alkemyTechs.add(html);
+			alkemyTechs.add(javascript);
+			alkemyTechs.add(react);
+			alkemyTechs.add(redux);
+
 			Projects RR = projectService.addProject(new Projects("Radium Rocket",
 					"Development of a fictional enterprise that matches applicants with open jobs from client companies",
 					"./assets/logos/RR.png", RRTechs, new ArrayList<ProjectUrl>()));
@@ -151,9 +159,9 @@ public class DemoApplication {
 
 			Projects AP = projectService.addProject(new Projects("Argentina Programa",
 					"Portfolio development",
-					"./assets/logos/AP.png", APTechs, new ArrayList<ProjectUrl>()));
+					"./assets/logos/AP.png", APTechs, new ArrayList<ProjectUrl>(), "https://yoprogramoapp.web.app/"));
 			projectService
-					.addUrl(new ProjectUrl(null, "https://github.com/GuidoGlielmi/YoProgramo-server", "YoProgramo-server", AP,
+					.addUrl(new ProjectUrl(null, "https://github.com/GuidoGlielmi/YoProgramo-app", "YoProgramo-app", AP,
 							AP.getId()));
 			projectService
 					.addUrl(new ProjectUrl(null, "https://github.com/GuidoGlielmi/YoProgramo-server", "YoProgramo-server", AP,
@@ -161,12 +169,22 @@ public class DemoApplication {
 
 			Projects aerolab = projectService.addProject(new Projects("Aerolab challenge",
 					"E-commerce landing page",
-					"./assets/logos/aerolab.jpg", aerolabTechs, new ArrayList<ProjectUrl>()));
+					"./assets/logos/aerolab.jpg", aerolabTechs, new ArrayList<ProjectUrl>(),
+					"https://aerolab-challenge-nexik9h5v-guidoglielmi.vercel.app/"));
 
 			projectService
 					.addUrl(
 							new ProjectUrl(null, "https://github.com/GuidoGlielmi/Aerolab-challenge", "Aerolab-challenge", aerolab,
 									aerolab.getId()));
+			Projects alkemy = projectService.addProject(new Projects("Alkemy React Skill Up",
+					"App for the implementation of SCRUM methodology",
+					"./assets/logos/alkemy.jpg", alkemyTechs, new ArrayList<ProjectUrl>(),
+					"https://guidoglielmi.github.io/alkemy-project/"));
+
+			projectService
+					.addUrl(
+							new ProjectUrl(null, "https://github.com/GuidoGlielmi/alkemy-project", "Alkemy-Project", alkemy,
+									alkemy.getId()));
 
 		};
 	}

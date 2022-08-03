@@ -34,6 +34,16 @@ public class Projects {
   /* @JoinColumn creates a column in the many side of the relation with the given name that references the PK of the parent entity, unless referencedColumnName is specified */
 
   public Projects(String title, String description, String projectImg, List<Technologies> techs,
+      List<ProjectUrl> urls, String deployUrl) {
+    this.title = title;
+    this.description = description;
+    this.projectImg = projectImg;
+    this.deployUrl = deployUrl;
+    this.techs = techs;
+    this.urls = urls;
+  }
+
+  public Projects(String title, String description, String projectImg, List<Technologies> techs,
       List<ProjectUrl> urls) {
     this.title = title;
     this.description = description;
