@@ -58,15 +58,13 @@ public class DemoApplication {
 					"04/2016", "11/2019", "Sound and Recording Technician", "./assets/logos/fhya.png"));
 			experienceService.addExperience(new Experiences(null, "Radium Rocket", "MERN stack Bootcamp", "09/2021",
 					"01/2022", "./assets/img/certificates/RR.jpg", "./assets/logos/RR.png"));
-			experienceService.addExperience(new Experiences(null, "Argentina Programa", "Portfolio development", "11/2021",
-					"05/2022", "", "./assets/logos/AP.png"));
 			experienceService.addExperience(
 					new Experiences(null, "Taller Corazón de Manzana", "Customer attention and inventory management", "02/2019",
 							"current", "", "./assets/logos/TCDM.jpg"));
-			skillService.addSkill(new Skills(null, "Proactive", 80, "Hard and Soft"));
+			skillService.addSkill(new Skills(null, "Proactive", 75, "Hard and Soft"));
 			skillService.addSkill(new Skills(null, "Active listening", 80, "Hard and Soft"));
-			skillService.addSkill(new Skills(null, "Empathy", 80, "Hard and Soft"));
-			skillService.addSkill(new Skills(null, "Creativity", 80, "Hard and Soft"));
+			skillService.addSkill(new Skills(null, "Empathy", 85, "Hard and Soft"));
+			skillService.addSkill(new Skills(null, "Creativity", 85, "Hard and Soft"));
 			skillService.addSkill(new Skills(null, "Resilience", 80, "Hard and Soft"));
 			skillService.addSkill(new Skills(null, "Español", 100, "Language"));
 			skillService.addSkill(new Skills(null, "English", 80, "Language"));
